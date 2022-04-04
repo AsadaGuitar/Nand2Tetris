@@ -15,5 +15,36 @@ CHIP RAM8 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+        /**
+        * 8-way demultiplexor:
+        * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
+        *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
+        *                            etc.
+        *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
+        */
+        DMux8Way(in=load, sel=address, a=w1, b=w2, c=w3, d=w4, e=w5, f=w6, g=w7, h=w8);
+        
+        // 指定アドレス値を変換
+        Register(in=in, load=w1, out=r1);
+        Register(in=in, load=w2, out=r2);
+        Register(in=in, load=w3, out=r3);
+        Register(in=in, load=w4, out=r4);
+        Register(in=in, load=w5, out=r5);
+        Register(in=in, load=w6, out=r6);
+        Register(in=in, load=w7, out=r7);
+        Register(in=in, load=w8, out=r8);
+
+        /**
+        * 8-way 16-bit multiplexor:
+        * out = a if sel == 000
+        *       b if sel == 001
+        *       c if sel == 010
+        *       d if sel == 011
+        *       e if sel == 100
+        *       f if sel == 101
+        *       g if sel == 110
+        *       h if sel == 111
+        */
+        // 指定レジスタの値を返却
+        Mux8Way16(a=r1, b=r2, c=r3, d=r4, e=r5, f=r6, g=r7, h=r8, sel=address, out=out);
 }

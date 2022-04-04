@@ -15,5 +15,19 @@ CHIP RAM64 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+        // select register.
+        DMux8Way(in=load, sel=address[0..2], a=dm1, b=dm2, c=dm3, d=dm4, e=dm5, f=dm6, g=dm7, h=dm8);
+
+        RAM8(in=in, load=dm1, address=address[3..5], out=r1);
+        RAM8(in=in, load=dm2, address=address[3..5], out=r2);
+        RAM8(in=in, load=dm3, address=address[3..5], out=r3);
+        RAM8(in=in, load=dm4, address=address[3..5], out=r4);
+        RAM8(in=in, load=dm5, address=address[3..5], out=r5);
+        RAM8(in=in, load=dm6, address=address[3..5], out=r6);
+        RAM8(in=in, load=dm7, address=address[3..5], out=r7);
+        RAM8(in=in, load=dm8, address=address[3..5], out=r8);
+
+        // change value.
+        Mux8Way16(a=r1, b=r2, c=r3, d=r4,
+                e=r5, f=r6, g=r7, h=r8, sel=address[0..2], out=out);
 }
