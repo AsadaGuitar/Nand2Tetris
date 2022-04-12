@@ -12,3 +12,13 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+
+@i
+M = 1
+@sum
+M = 0
+
+@i
+D = M
+@100
+D = D - A
