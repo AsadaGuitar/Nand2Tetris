@@ -13,12 +13,47 @@
 
 // Put your code here.
 
-@i
-M = 1
-@sum
-M = 0
+    @8192
+    D=A
+    @FULL_SCREEN
+    M=D
+    @COUNT
+    M=0
+(LOOP)
+    @KBD
+    D=M
+    @PAINT_DISPLAY
+    D;JNE
+    @COUNT
+    D=M
+    @LOOP
+    D;JEQ
+    @DELETE_DISPLAY
+    0;JMP
 
-@i
-D = M
-@100
-D = D - A
+(PAINT_DISPLAY)
+    @SCREEN
+    D=A
+    @COUNT
+    D=D+M
+    @FULL_SCREEN
+    A=M-D
+    @LOOP
+    A;JEQ
+    A=D
+    M=-1
+    @COUNT
+    M=M+1
+    @LOOP
+    0;JMP
+
+(DELETE_DISPLAY)
+    @SCREEN
+    D=A
+    @COUNT
+    M=M-1
+    D=D+M
+    A=D
+    M=0
+    @LOOP
+    0;JMP

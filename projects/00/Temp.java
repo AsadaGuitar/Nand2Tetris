@@ -22,7 +22,7 @@ public class Temp {
             if (zx) temp = false;
             var notx = !x;
             if (nx) temp = notx;
-            
+
     }
 
     private class AluResult {
@@ -30,8 +30,6 @@ public class Temp {
         public boolean zr;
         public boolean ng;
         
-
-
         public AluResult(boolean[] out, boolean zr, boolean ng) {
             this.out = out;
             this.zr = zr;
