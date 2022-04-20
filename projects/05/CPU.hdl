@@ -25,6 +25,18 @@
  * than to the address resulting from executing the current instruction. 
  */
 
+ /**
+ * A命令：
+ * 　0vvv vvvv vvvv vvvv
+ * 　in[15]をAレジスタに設定する。
+ *
+ * C命令：
+ * 　111a cccc ccdd djjj
+ * 　a, cc cccc = ALUの入力値
+ * 　ddd = ALUの出力先
+ * 　jjj = gotoの行き先
+ */
+
 CHIP CPU {
 
     IN  inM[16],         // M value input  (M = contents of RAM[A])
@@ -38,6 +50,14 @@ CHIP CPU {
         addressM[15],    // Address in data memory (of M)
         pc[15];          // address of next instruction
 
+    //     i: instruction[15]
+    // value: instruction[0..14]
+    //  comp: instruction[6..11]
+    //  dest: instruction[3..5]
+    //  jump: instruction[0..2]
+
     PARTS:
-    // Put your code here:
+        Mux16(a=instruction, b=outALU, sel=instruction[15], out=toA_Register);
+        
+
 }
