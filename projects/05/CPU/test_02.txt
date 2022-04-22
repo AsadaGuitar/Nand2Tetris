@@ -1,17 +1,22 @@
-inM[16] = 0
-instruction[16] = 0011 0000 0011 1001
-reset = 0
+Test_Script_No_1
 
-outM[16] = 0000 0000 0000 0000
-writeM = 0
-addressM[15] = 011 0000 0011 1001
-pc[15] = 000 0000 0000 0001
+test_data {
+    inM[16] = 11111
+    instruction[16] = 1111 0100 1111 0000
+    reset = 0
 
+    outM[16] =
+    writeM =
+    addressM[15] = 
+    pc[15] = 
+}
 
-[RESULT]
+<instruction>
 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
- 0  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v
- 0  0  1  1  0  0  0  0  0  0  1  1  1  0  0  1
+ 1  1  1  a  c  c  c  c  c  c  d  d  d  j  j  j
+ 1  1  1  1  0  1  0  0  1  1  1  1  0  0  0  0
+
+<< coocmade
 
 gate_01 
     Mux16:

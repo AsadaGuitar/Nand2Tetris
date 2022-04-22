@@ -1,0 +1,141 @@
+Test_Script_No_1
+
+test_data {
+    inM[16] = 0
+    instruction[16] = 0011 0000 0011 1001
+    reset = 0
+
+    outM[16] = 0000 0000 0000 0000
+    writeM = 0
+    addressM[15] = 011 0000 0011 1001
+    pc[15] = 000 0000 0000 0001
+}
+
+<instruction>
+15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+ 0  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v
+ 0  0  1  1  0  0  0  0  0  0  1  1  1  0  0  1
+
+gate_01 
+    Mux16:
+    a = 0011000000111001
+    b = outALU
+    sel = 0
+    out = 0011000000111001
+gate_02
+    And:
+    a = 1
+    b = 0
+    out = 0
+gate_03
+    Not:
+    in = 0
+    out = 1
+gate_04
+    Or:
+    a (gate_02) = 0
+    b (gate_03) = 1
+    out = 1
+A_REGISTER
+    in (gate_01) = 0011000000111001
+    load (gate04) = 1
+    out[0..14] = 011000000111001 -> addressM
+    out = 0011000000111001
+gate_05
+    And:
+    a = 1
+    b = 0
+    out = 0
+D_REGISTER
+    in (ALU_feedback) = 
+    load (gate_05) = 0
+    out = 0000000000000000(init value)
+gate_06
+    Mux16:
+    a (A_REGISTER) = 0011000000111001
+    b (inM) = 0
+    sel = 1
+    out = 0
+ALU
+    x (D_REGISTER) = 0000000000000000(init value)
+    y (gate_06) = 0
+    zx = 0
+    nx = 0
+    zy = 0
+    ny = 0
+    f  = 0
+    no = 0
+    out = ALU_feedback
+    out = 0000000000000000 -> outM
+    zr = 1
+    ng = 0
+gate_07
+    And
+    a = 0
+    b = 0
+    out = 0
+gate_08
+    And
+    a = 0
+    b = 0
+    out = 0
+gate_09
+    And
+    a = 1
+    b = 0
+    out = 0
+gate_10
+    Not
+    in (ALU_zr) = 1
+    out = 0  
+gate_11
+    Not
+    in (ALU_ng) = 0
+    out = 1
+gate_12 
+    And
+    a (gate_10) = 0
+    b (gate_11) = 1
+    out = 0
+gate_13
+    And
+    a (gate_09) = 0
+    b (gate_12) = 0
+    out = 0
+gate_14
+    And
+    a (gate_08) = 0
+    b (ALU_zr) = 1
+    out = 0
+gate_15
+    And
+    a (gate_07) = 0
+    b (ALU_ng) = 0
+    out = 0
+gate_16
+    Or
+    a (gate_13) = 0
+    b (gate_14) = 0
+    out = 0
+gate_17
+    Or 
+    a (gate_16) = 0
+    b (gate_15) = 0
+    out = 0
+gate_18
+    Not
+    in (gate_17) = 0
+    out = 1
+PC
+    in (A_REGISTER) = 0011000000111001
+    load (gate_17) = 0
+    inc (gate_18) = 1
+    reset = 0
+    out[0..14] = 1 -> pc
+gate_19
+    And
+    a = 1
+    b = 0
+    out = 0 -> writeM
+
+ 
