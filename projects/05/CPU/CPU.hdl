@@ -30,7 +30,7 @@
          * ALU
          */
         Mux16(a=outRegA, b=inM, sel=instruction[12], out=outMux2); // gate_06
-        ALU(x=outRegD, y=outMux2, zx=instructio n[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outALU, out=outM, zr=zero, ng=negative);
+        ALU(x=outRegD, y=outMux2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outALU, out=outM, zr=zero, ng=negative);
         /**
          * PC
          */
