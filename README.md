@@ -10,5 +10,8 @@
 
 
 ### parse.bat
-動作確認用プログラム。<br>
+CPUの動作確認用プログラム。<br>
 引数に16bit命令文を代入し実行すると、インデントと各bitの属性を表示する。
+
+### projects/05/CPU/hack_cpu.drawio
+CPUの論理回路図。
