@@ -1,12 +1,12 @@
-Test_Script_No_1
+Test_Script_No_2
 
 test_data {
-    inM[16] = 11111
-    instruction[16] = 1111 0100 1111 0000
+    inM[16] = 0
+    instruction[16] = 1110 1100 0001 0000
     reset = 0
 
-    outM[16] =
-    writeM =
+    outM[16] = 
+    writeM = 
     addressM[15] = 
     pc[15] = 
 }
@@ -14,15 +14,15 @@ test_data {
 <instruction>
 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
  1  1  1  a  c  c  c  c  c  c  d  d  d  j  j  j
- 1  1  1  1  0  1  0  0  1  1  1  1  0  0  0  0
+ 1  1  1  0  1  1  0  0  0  0  0  1  0  0  0  0
 
-<< coocmade
+ << cocomade
 
 gate_01 
     Mux16:
-    a = 0011000000111001
-    b = outALU
-    sel = 0
+    a (instruction) = 0011000000111001
+    b (ALU_feedback)= outALU
+    sel (instruction[15]) = 1
     out = 0011000000111001
 gate_02
     And:
