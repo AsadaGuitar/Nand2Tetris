@@ -1,0 +1,14 @@
+[debug] > Exec(;clean ;package, None, None)
+[debug] > Exec(clean, None, None)
+[debug] Evaluating tasks: clean
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[success] Total time: 0 s, completed 2022/04/22 14:30:18
+[debug] > Exec(package, None, None)
+[debug] Evaluating tasks: Compile / package
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser\target\scala-2.13\classes ...
+[info] done compiling
+[success] Total time: 1 s, completed 2022/04/22 14:30:19
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)
