@@ -9,6 +9,8 @@ test_data {
     writeM = 0
     addressM[15] = 011 0000 0011 1001
     pc[15] = 000 0000 0000 0001
+
+    ALU_feedback = 0000 0000 0000 0000
 }
 
 <instruction>
@@ -54,7 +56,7 @@ gate_06
     Mux16:
     a (A_REGISTER) = 0011000000111001
     b (inM) = 0
-    sel = 1
+    sel (instruction[12]) = 1
     out = 0
 ALU
     x (D_REGISTER) = 0000000000000000(init value)

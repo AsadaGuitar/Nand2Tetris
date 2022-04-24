@@ -1,14 +1,25 @@
 Test_Script_No_2
 
 test_data {
-    inM[16] = 0
-    instruction[16] = 1110 1100 0001 0000
-    reset = 0
 
-    outM[16] = 
-    writeM = 
-    addressM[15] = 
-    pc[15] = 
+    DEFAULT:
+        A_REGISTER = 0011 0000 0011 1001
+        D_REGISTER = 0
+        PC = 1
+
+    FEEDBACK:
+        ALU: 0011 0000 0011 1001
+    
+    INPUT:
+        inM[16] = 0
+        instruction[16] = 1110 1100 0001 0000
+        reset = 0
+
+    OUTPUT:
+        outM[16] = 
+        writeM = 
+        addressM[15] = 
+        pc[15] = 
 }
 
 <instruction>
@@ -16,76 +27,164 @@ test_data {
  1  1  1  a  c  c  c  c  c  c  d  d  d  j  j  j
  1  1  1  0  1  1  0  0  0  0  0  1  0  0  0  0
 
- << cocomade
 
 gate_01 
     Mux16:
-    a (instruction) = 0011000000111001
-    b (ALU_feedback)= outALU
+    a (instruction) = 1110 1100 0001 0000
+    b (ALU_feedback)= 0011 0000 0011 1001
     sel (instruction[15]) = 1
-    out = 0011000000111001
+    out = 0011 0000 0011 1001: outMux1
 gate_02
     And:
-    a = 1
-    b = 0
-    out = 0
+    a (instruction[5]) = 0
+    b (instruction[15]) = 1
+    out = 0: insWriteA
 gate_03
     Not:
-    in = 0
-    out = 1
+    in (instruction[15]) = 1
+    out = 0: addWriteA
 gate_04
     Or:
     a (gate_02) = 0
-    b (gate_03) = 1
-    out = 1
+    b (gate_03) = 0
+    out = 0: writeA
 A_REGISTER
-    in (gate_01) = 0011000000111001
-    load (gate04) = 1
-    out[0..14] = 011000000111001 -> addressM
-    out = 0011000000111001
+    default = 0011 0000 0011 1001
+    in (gate_01) = 0011 0000 0011 1001
+    load (gate04) = 0
+    out[0..14] = 011 0000 0011 1001 -> addressM
+    out = 0011 0000 0011 1001: outRegA
 gate_05
     And:
-    a = 1
-    b = 0
-    out = 0
+    a (instruction[4]) = 1
+    b (instruction[15]) = 1
+    out = 1: writeD
 D_REGISTER
-    in (ALU_feedback) = 
-    load (gate_05) = 0
-    out = 0000000000000000(init value)
+    in (ALU_feedback) = 0011 0000 0011 1001
+    load (gate_05) = 1
+    out = 0011 0000 0011 1001: outRegD
 gate_06
     Mux16:
-    a (A_REGISTER) = 0011000000111001
+    a (A_REGISTER) = 0011 0000 0011 1001
     b (inM) = 0
-    sel = 1
-    out = 0
+    sel (instruction[12]) = 0
+    out = 0011 0000 0011 1001: outMux2
 ALU
-    x (D_REGISTER) = 0000000000000000(init value)
-    y (gate_06) = 0
-    zx = 0
-    nx = 0
-    zy = 0
-    ny = 0
-    f  = 0
-    no = 0
+    x (D_REGISTER) = 0011 0000 0011 1001
+    y (gate_06) = 0011 0000 0011 1001
+    zx (instruction[11]) = 1
+    nx (instruction[10]) = 1
+    zy (instruction[9]) = 0
+    ny (instruction[8]]) = 0
+    f  (instruction[7]) = 0
+    no (instruction[6]) = 0
     out = ALU_feedback
-    out = 0000000000000000 -> outM
-    zr = 1
-    ng = 0
+    out = 0011 0000 0011 1001 -> outM
+    zr = 0: zero
+    ng = 0: nagative
+    ALU:
+        gate_01
+            Mux16
+                a (x) = 0011 0000 0011 1001
+                b = false
+                sel (zx) = 1
+                out = 0000 0000 0000 0000: rzx
+        gate_02
+            Not16
+                in (rzx) = 0000 0000 0000 0000
+                out = 1111 1111 1111 1111: notx
+        gate_03
+            Mux16
+                a (rzx) = 0000 0000 0000 0000
+                b (notx) = 1111 1111 1111 1111
+                sel (nx) = 1
+                out = 1111 1111 1111 1111: rnx
+        gate_04 
+            Mux16
+                a (y) = 0011 0000 0011 1001
+                b = false
+                sel (zy) = 0
+                out = 0011 0000 0011 1001: rzy
+        gate_05
+            Not16
+                in (rzy) = 0011 0000 0011 1001
+                out = 1100 1111 1100 0110: noty
+        gate_06
+            Mux16
+                a (rzy) = 0011 0000 0011 1001
+                b (noty) = 1100 1111 1100 0110
+                sel (ny) = 0
+                out = 0011 0000 0011 1001: rny
+        gate_07
+            Add16
+                a (rnx) = 1111 1111 1111 1111
+                b (rny) = 0011 0000 0011 1001
+                out = 0011 0000 0011 1000: rfadd
+        gate_08
+            And16
+                a (rnx) = 1111 1111 1111 1111
+                b (rny) = 0011 0000 0011 1001
+                out = 0011 1111 0011 1001: rfand
+        gate_09
+            Mux16
+                a (rfand) = 0011 1111 0011 1001
+                b (rfadd) = 0011 0000 0011 1000
+                sel (f) = 0
+                out = 0011 1111 0011 1001: rf
+        gate_10
+            Not16
+                in (rf) = 0011 1111 0011 1001
+                out = 1100 0000 1100 0110: rno
+        gate_11
+            Mux16
+                a (rf) = 0011 1111 0011 1001
+                b (rno) = 1100 0000 1100 0110
+                sel (no) = 0
+                out = 0011 1111 0011 1001 : out
+                out[0..7] = 0011 1001: outlow
+                out[8..15] = 0011 1111: outhi
+                out[15] = 0: ng
+        gate_12
+            Or8Way
+                in (outlow) = 0011 1001
+                out = 1: lowor
+        gate_13
+            Or8Way
+                in (outhi) = 0011 1111
+                out = 1: hior
+        gate_14
+            Or
+                a (lowor) = 1
+                b (hior) = 1
+                out = 1: rzror
+        gate_15
+            Not
+                in (rzror) = 0
+                out = 1: zr
+
+<instruction>
+15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+ 1  1  1  a  c  c  c  c  c  c  d  d  d  j  j  j
+ 1  1  1  0  1  1  0  0  0  0  0  1  0  0  0  0
+ 
+/**
+ * PC
+ */
 gate_07
-    And
-    a = 0
-    b = 0
-    out = 0
+    And 
+    a (instruction[2]) = 0
+    b (instruction[15]) = 1
+    out = 0: insJumpNeg
 gate_08
     And
-    a = 0
-    b = 0
-    out = 0
+    a (instruction[1]) = 0
+    b (instruction[15]) = 1
+    out = 0: insJumpZero
 gate_09
     And
-    a = 1
-    b = 0
-    out = 0
+    a (instruction[0]) = 0
+    b (instruction[15]) = 1
+    out = 0: insJumpPos
 gate_10
     Not
     in (ALU_zr) = 1
