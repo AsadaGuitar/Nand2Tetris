@@ -1,0 +1,145 @@
+[debug] > Exec(;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download" ;preferScala2;*/*:dumpStructureTo C:/Users/d.takahashi/AppData/Local/Temp/sbt-structure.xml; session clear-all, None, None)
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.6.2 (Oracle Corporation Java 16.0.1)
+[debug]       Load.loadUnit: plugins took 45.903ms
+[debug]       Load.loadUnit: defsScala took 0.0059ms
+[debug] [Loading] Scanning directory C:\Users\d.takahashi\.sbt\1.0\plugins
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\d.takahashi\.sbt\1.0\plugins, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 1.1998 ms
+[debug]           Load.resolveProject(global-plugins) took 1.4175ms
+[debug]         Load.loadTransitive: finalizeProject(Project(id global-plugins, base: C:\Users\d.takahashi\.sbt\1.0\plugins, plugins: List(<none>))) took 3.0939ms
+[debug] [Loading] Done in C:\Users\d.takahashi\.sbt\1.0\plugins, returning: (global-plugins)
+[debug]       Load.loadUnit: loadedProjectsRaw took 4.4275ms
+[debug]       Load.loadUnit: cleanEvalClasses took 0.0217ms
+[debug]     Load.loadUnit(file:/C:/Users/d.takahashi/.sbt/1.0/plugins/, ...) took 54.0691ms
+[debug]   Load.apply: load took 56.0911ms
+[debug]   Load.apply: resolveProjects took 0.0775ms
+[debug]   Load.apply: finalTransforms took 5.0797ms
+[debug]   Load.apply: config.delegates took 0.2502ms
+[debug]   Load.apply: Def.make(settings)... took 63.2062ms
+[debug]   Load.apply: structureIndex took 20.6294ms
+[debug]   Load.apply: mkStreams took 0.002ms
+[info] loading global plugins from C:\Users\d.takahashi\.sbt\1.0\plugins
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug] Load.defaultLoad until apply took 412.2611ms
+[debug]           Load.loadUnit: plugins took 26.5311ms
+[debug]           Load.loadUnit: defsScala took 0.0026ms
+[debug] [Loading] Scanning directory C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser\project
+[debug]             Load.loadUnit: mkEval took 0.4031ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser\project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 5.3655 ms
+[info] loading settings for project machinelangparser-build from plugins.sbt,idea.sbt ...
+[debug]               Load.resolveProject(machinelangparser-build) took 1.5051ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id machinelangparser-build, base: C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser\project, plugins: List(<none>))) took 7.4505ms
+[debug] [Loading] Done in C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser\project, returning: (machinelangparser-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 57.8949ms
+[debug]           Load.loadUnit: cleanEvalClasses took 9.3583ms
+[debug]         Load.loadUnit(file:/C:/Users/d.takahashi/Document/Projects/cs/nand2tetris/machineLangParser/project/, ...) took 94.8221ms
+[debug]       Load.apply: load took 96.1173ms
+[debug]       Load.apply: resolveProjects took 0.0712ms
+[debug]       Load.apply: finalTransforms took 5.3479ms
+[debug]       Load.apply: config.delegates took 0.2022ms
+[debug]       Load.apply: Def.make(settings)... took 59.9833ms
+[debug]       Load.apply: structureIndex took 15.6542ms
+[debug]       Load.apply: mkStreams took 0.0021ms
+[info] loading project definition from C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser\project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]     Load.loadUnit: plugins took 406.7575ms
+[debug]     Load.loadUnit: defsScala took 0.0026ms
+[debug] [Loading] Scanning directory C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser
+[debug]       Load.loadUnit: mkEval took 0.4952ms
+[debug] [Loading] Found root project root w/ remaining 
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbtassembly.AssemblyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.StructurePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.IdeaShellPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbtassembly.AssemblyPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.StructurePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.IdeaShellPlugin)))
+[debug] Clause(And(Set(Atom(sbt.plugins.CorePlugin), Atom(sbt.plugins.JvmPlugin))),Set(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.SemanticdbPlugin,org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin,sbt.plugins.JUnitXmlReportPlugin,sbtassembly.AssemblyPlugin,org.jetbrains.sbt.IdeaShellPlugin,org.jetbrains.sbt.StructurePlugin,sbt.plugins.MiniDependencyTreePlugin)
+[debug] Plugins.deducer#function took 1.3794 ms
+[info] loading settings for project root from build.sbt ...
+[debug]         Load.resolveProject(root) took 29.842ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id root, base: C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser, plugins: List(<none>))) took 31.6951ms
+[debug] [Loading] Done in C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\machineLangParser, returning: (root)
+[debug]     Load.loadUnit: loadedProjectsRaw took 134.6021ms
+[debug]     Load.loadUnit: cleanEvalClasses took 18.1192ms
+[debug]   Load.loadUnit(file:/C:/Users/d.takahashi/Document/Projects/cs/nand2tetris/machineLangParser/, ...) took 560.6068ms
+[debug] Load.apply: load took 562.2013ms
+[debug] Load.apply: resolveProjects took 0.0741ms
+[debug] Load.apply: finalTransforms took 14.9164ms
+[debug] Load.apply: config.delegates took 0.3164ms
+[debug] Load.apply: Def.make(settings)... took 50.4488ms
+[debug] Load.apply: structureIndex took 14.3472ms
+[debug] Load.apply: mkStreams took 0.0017ms
+[info] set current project to machineLangParser (in build file:/C:/Users/d.takahashi/Document/Projects/cs/nand2tetris/machineLangParser/)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download", None, None)
+[info] Defining Global / sbtStructureOptions
+[info] The new value will be used by Global / ssOptions
+[debug] Defining 
+[debug] 	Global / sbtStructureOptions
+[debug] 
+[debug] The new value will be used by 
+[debug] 	Global / ssOptions
+[info] Reapplying settings...
+[info] set current project to machineLangParser (in build file:/C:/Users/d.takahashi/Document/Projects/cs/nand2tetris/machineLangParser/)
+[debug] > Exec(preferScala2, None, None)
+[debug] > Exec(*/*:dumpStructureTo C:/Users/d.takahashi/AppData/Local/Temp/sbt-structure.xml, None, None)
+[debug] Evaluating tasks: Global / dumpStructureTo
+[warn] sbt 0.13 shell syntax is deprecated; use slash syntax instead: Global / dumpStructureTo
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] Writing structure to C:\Users\d.takahashi\AppData\Local\Temp\sbt-structure.xml...
+[info] Done.
+[success] Total time: 1 s, completed 2022/04/25 9:34:07
+[debug] > Exec(session clear-all, None, None)
+[info] Reapplying settings...
+[info] set current project to machineLangParser (in build file:/C:/Users/d.takahashi/Document/Projects/cs/nand2tetris/machineLangParser/)
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)
