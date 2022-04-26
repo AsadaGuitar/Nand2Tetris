@@ -2,6 +2,8 @@ use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 
+
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let args: Vec<String> = env::args().collect();
@@ -12,16 +14,31 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             let output_filepath = "./output.hack";
 
+            // file lines
             let lines_as_str: Result<Vec<String>, std::io::Error> =
                 BufReader::new(File::open(filepath)?)
                     .lines()
                     .into_iter()
                     .collect();
 
-            write_to_file_path(
-                output_filepath,
-                lines_as_str?.iter().map(|s|s.as_str()).collect()
-            )?
+            let command_types =
+                lines_as_str.unwrap().iter()
+                    .map(|line| if is_a_command(line) {
+                        "A\n"
+                    } else {
+                        if is_label(line) {
+                            "L\n"
+                        } else {
+                            if is_jump(line) {
+                                "J\n"
+                            } else {
+                                "C\n"
+                            }
+                        }
+                    }).collect::<Vec<&str>>();
+
+            // write output data
+            write_to_file_path(output_filepath, command_types)?
 
         } else {
             println!("Invalid extension.")
@@ -30,6 +47,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Invalid program arguments.")
     }
     Ok(())
+}
+
+fn is_a_command(line: &String) -> bool {
+    let head = line.chars().next().unwrap();
+    head == '@' || head == 'A'
+}
+
+fn is_label(line: &String) -> bool {
+    let head = line.chars().next().unwrap();
+    head == '('
+}
+
+fn is_jump(line: &String) -> bool {
+    line.contains(";")
 }
 
 fn validate_filepath(filepath: &str) -> bool {

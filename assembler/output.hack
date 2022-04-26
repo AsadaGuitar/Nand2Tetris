@@ -1,1 +1,18 @@
-    @count    M = 0    D = M    @max    M = 10(LOOP)    @count    M = M + 1    D = M    @max    D = A - D    @LOOP    D; JEQ    @END    0; JMP(END)    @END    0;JMP
+A
+C
+C
+A
+C
+L
+A
+C
+C
+A
+C
+A
+J
+A
+J
+L
+A
+J
