@@ -21,6 +21,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     .into_iter()
                     .collect();
 
+            //括弧シンボルを取得する。
+            let labels =
+                lines_as_str.map(|vec|
+                    vec.iter().filter(|&line|
+                        head(line).contains(&'(')
+                    )
+                );
+
             let command_types =
                 lines_as_str.unwrap().iter()
                     .map(|line| if is_a_command(line) {
@@ -47,6 +55,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Invalid program arguments.")
     }
     Ok(())
+}
+
+fn head(line: &String) -> Option<char> {
+    line.chars().next()
 }
 
 fn is_a_command(line: &String) -> bool {
