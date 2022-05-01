@@ -17,6 +17,12 @@ trait SymbolTableModule extends Utility {
   import SymbolTableModule._
   import AssemblyRegex._
 
+  /**
+   * ex)
+   *    (LOOP) -> 0000 0000 0001 0000 // 16 ~
+   *    @LOOP  -> 0000 0000 0001 0000
+   *    @COUNT -> 0000 0011 1110 1000 // 1000 ~
+   */
   def assignAddress(assembly: Seq[String]): Seq[String] = {
 
     val labels = {
