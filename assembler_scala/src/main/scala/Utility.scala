@@ -1,7 +1,7 @@
 import scala.annotation.tailrec
 
 object Utility {
-  
+
   def inner(string: String): String ={
     @tailrec
     def loop(temp: String, count: Int): String = {
