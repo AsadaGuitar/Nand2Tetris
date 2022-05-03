@@ -4,7 +4,7 @@ import cats.implicits.{catsSyntaxEq, toTraverseOps}
 import java.io.FileOutputStream
 import scala.io.{BufferedSource, Source}
 
-object Main extends IOApp with Utility
+object Main extends IOApp
   with SymbolTableModule with CodeModule {
 
   sealed trait Command

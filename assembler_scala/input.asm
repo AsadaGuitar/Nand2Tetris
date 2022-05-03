@@ -1,3 +1,6 @@
+@100
+D=A
+M=D
 @count
 M = 0
 D = M

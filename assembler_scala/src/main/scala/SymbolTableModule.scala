@@ -5,56 +5,47 @@ object SymbolTableModule {
   abstract class Symbol(val name: String, val address: Int)
   case class Label(override val name: String, override val address: Int) extends Symbol(name,address)
   case class Variable(override val name: String, override val address: Int) extends Symbol(name,address)
-
-  implicit class RichSymbols(symbol: Seq[Symbol]) {
-    def getAddressByName(name: String): String ={
-      symbol.find(_.name === name).get.address.toString
-    }
-  }
 }
 
-trait SymbolTableModule extends Utility {
+trait SymbolTableModule {
   import SymbolTableModule._
   import AssemblyRegex._
+  import Utility._
 
-  /**
-   * ex)
-   *    (LOOP) -> // jump position 
-   *    @LOOP  -> @0
-   *    @COUNT -> @16 ~
-   */
-  def assignAddress(assembly: Seq[String]): Seq[String] = {
+  def assignAddress(assembly: Seq[String]): Seq[String] ={
 
     val labels = {
-      var count = 0
-      var labels: Seq[Label] = Seq()
-      for (line <- assembly) yield {
-        if (labelPattern.matches(line)) {
-          labels = labels :+ Label(line.inner, count)
-        }
+      var count = -1
+      assembly.foldLeft(Nil: Seq[Label]){ (acc, line) =>
         count += 1
+        if (labelPattern.matches(line)) acc :+ Label(inner(line), count)
+        else acc
       }
-      labels
     }
+
     val variables = {
-      var count = 15
+      var count = 1023
       assembly.filter { line =>
         aCommandPattern.matches(line) && !labels.exists(_.name === line.tail)
       }.map { line =>
-        count += 1
-        Variable(line.tail, count)
+        val symbol = line.tail
+        if (numberPattern.matches(symbol)) {
+          Variable(symbol,symbol.toInt)
+        } else {
+          count += 1
+          Variable(line.tail, count)
+        }
       }
     }
 
     assembly.filter(ln => !labelPattern.matches(ln)).map {
-      // A command
       case line if aCommandPattern.matches(line) =>
         labels.find(_.name === line.tail).fold {
-          '@' + variables.getAddressByName(line.tail)
+          val address = variables.find(_.name === line.tail).get.address.toString
+          '@' + address
         } { label =>
           '@' + label.address.toString
         }
-      // C command
       case line => line
     }
   }

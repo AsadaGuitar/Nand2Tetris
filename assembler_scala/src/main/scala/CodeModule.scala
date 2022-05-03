@@ -1,12 +1,8 @@
-import cats._, cats.data._, cats.implicits._
-import cats._
-import cats.data._
 import cats.implicits._
-import scala.annotation.tailrec
 
-trait CodeModule {
+object CodeModule {
 
-  private val destBinary: String => Option[String] ={
+  val destBinary: String => Option[String] ={
     case "null" => "000".some
     case "M"    => "001".some
     case "D"    => "010".some
@@ -18,7 +14,7 @@ trait CodeModule {
     case _      => None
   }
 
-  private val compBinary: String => Option[String] ={
+  val compBinary: String => Option[String] ={
     case "0"   => "0101010".some
     case "1"   => "0111111".some
     case "-1"  => "0111010".some
@@ -50,7 +46,7 @@ trait CodeModule {
     case _     => None
   }
 
-  private val jumpBinary: String => Option[String] ={
+  val jumpBinary: String => Option[String] ={
     case "null" => "000".some
     case "JGT"  => "001".some
     case "JEQ"  => "010".some
@@ -61,33 +57,33 @@ trait CodeModule {
     case "JMP"  => "111".some
     case _      => None
   }
+}
+
+trait CodeModule {
+  import CodeModule._
+  import AssemblyRegex._
+  import Utility._
 
   /**
    * ex)
    *    "D=M" => "1110 0011 0000 1000"
    */
   def commandBinary(line: String): Option[String]  = {
-
-    val cmd = line.filter(_ != ' ') match {
-      // D=A;JMP
-      case line if line.matches(".*=.*;.*") =>
+    line.filter(_ != ' ') match {
+      case DCJ_Pattern(line) =>
         val Array(dest, temp) = line.split("=").take(2)
         val Array(comp, jump) = temp.split(";").take(2)
-        destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
-      // M=1
-      case line if line.matches(".*=.*") =>
+        "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
+      case DC_Pattern(line) =>
         val Array(dest, comp) = line.split("=").take(2)
         val jump = "null"
-        destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
-      // 0;JMP
-      case line if line.matches(".*;.*") =>
+        "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
+      case CJ_Pattern(line) =>
         val Array(comp, jump) = line.split(";").take(2)
         val dest = "null"
-        destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
+        "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
       case _ => None
     }
-
-    cmd.map("111" ++ _)
   }
 
   /**
@@ -96,23 +92,5 @@ trait CodeModule {
    */
   def addressBinary(address: String): Option[String] = {
     address.toIntOption.flatMap(a => bin16(a).map('0' + _.mkString.tail).toOption)
-  }
-
-  private def bin16(number: Int): Either[IndexOutOfBoundsException, Array[Int]] = {
-    val bin = new Array[Int](16)
-    @tailrec
-    def loop(n: Int, idx: Int = 15): Either[IndexOutOfBoundsException, Array[Int]] = {
-      if (n < 2) {
-        bin(idx) = n % 2
-        Right(bin)
-      } else {
-        bin(idx) = n % 2
-        if (idx == 0) {
-          Left(new IndexOutOfBoundsException("IndexOutOfBoundsException from 'bin16'."))
-        }
-        loop(n / 2, idx -1)
-      }
-    }
-    loop(number)
   }
 }
