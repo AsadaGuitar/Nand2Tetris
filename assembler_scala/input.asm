@@ -4,6 +4,7 @@ M=D
 @count
 M = 0
 D = M
+//Hello
 @max
 M = 1
 (LOOP)

@@ -5,11 +5,8 @@ import java.io.FileOutputStream
 import scala.io.{BufferedSource, Source}
 
 object Main extends IOApp
-  with SymbolTableModule with CodeModule {
-
-  sealed trait Command
-  case class CommandC(comp: Option[String], dest: Option[String], jump: Option[String]) extends Command
-  case class CommandA(head: String = "0", address: String) extends Command
+  with ParserModule with SymbolTableModule with CodeModule {
+  import AssemblyRegex._
 
   def fileReader(path: String): Resource[IO, BufferedSource] =
     Resource.make {
@@ -25,29 +22,33 @@ object Main extends IOApp
       IO(writer.close())
     }
 
+  private def getFileName(input: String): String ={
+    val temp = input.split("\\.").flatMap(s => s.split("/"))
+    temp(temp.length -2)
+  }
+
   override def run(args: List[String]): IO[ExitCode] = args.headOption match {
     case None => IO.println("Invalid arguments.").as(ExitCode.Success)
-    case Some(path) =>
-      fileReader(path).use(in => IO(in.getLines().toSeq)).map { assembly =>
-        import AssemblyRegex._
-
-        val hack: Option[Seq[String]] = assignAddress(assembly).map {
-          case line if aCommandPattern.matches(line) => addressBinary(line.tail)
-          case line => commandBinary(line)
+    case Some(path) if path.split("\\.").lastOption.fold(false)(_==="asm") =>
+      val hack: IO[Option[Seq[String]]] = fileReader(path).use{ in =>
+        val parsedAsm = this.parseAssembly(in.getLines().toSeq)
+        val assignedAsm = this.assignAddress(parsedAsm)
+        val hackAssembly = assignedAsm.map {
+          case line@aCommandPattern() => addressBinary(line)
+          case line@mnemonicPattern() => commandBinary(line)
+          case line => println(s"match error: $line"); None
         }.sequence
-
-        hack.foreach(lines => lines.foreach(println))
-
-        fileWriter("./output.hack").use { out =>
-          hack.fold(IO.println("program error.")){ lines =>
-            IO { lines.foreach { line =>
-                out.write((line ++ "\n").getBytes)
-              }
-            }
+        IO(hackAssembly)
+      }
+      val outputFileName = getFileName(path) ++ ".hack"
+      fileWriter(outputFileName).use{ out =>
+        hack.map { asm =>
+          asm.fold(println("Invalid assembly.")){ asm =>
+            asm.foreach(line => out.write((line + "\n").getBytes))
           }
-        }
-
+        } *> IO.println("Converted to machine language.")
       }.as(ExitCode.Success)
+    case _ => IO.println("Invalid file extension.").as(ExitCode.Success)
   }
 }
 

@@ -3,7 +3,7 @@ import scala.util.matching.Regex
 object AssemblyRegex {
 
   val labelPattern: Regex    = "\\(.+?\\)".r
-  val aCommandPattern: Regex = "^@.*".r
+  val aCommandPattern: Regex = "^@.*?$".r
   val numberPattern: Regex   = "^\\d+?$".r
   val symbolPattern: Regex   = "^\\D.*$".r
   val mnemonicPattern: Regex = "^(?![a-z]).*$".r

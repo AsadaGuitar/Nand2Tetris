@@ -68,29 +68,29 @@ trait CodeModule {
    * ex)
    *    "D=M" => "1110 0011 0000 1000"
    */
-  def commandBinary(line: String): Option[String]  = {
-    line.filter(_ != ' ') match {
-      case DCJ_Pattern(line) =>
-        val Array(dest, temp) = line.split("=").take(2)
-        val Array(comp, jump) = temp.split(";").take(2)
-        "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
-      case DC_Pattern(line) =>
-        val Array(dest, comp) = line.split("=").take(2)
-        val jump = "null"
-        "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
-      case CJ_Pattern(line) =>
-        val Array(comp, jump) = line.split(";").take(2)
-        val dest = "null"
-        "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
-      case _ => None
-    }
+  val commandBinary: String => Option[String] ={
+    case line@DCJ_Pattern() =>
+      val Array(dest, temp) = line.split("=").take(2)
+      val Array(comp, jump) = temp.split(";").take(2)
+      "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
+    case line@DC_Pattern() =>
+      val Array(dest, comp) = line.split("=").take(2)
+      val jump = "null"
+      "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)
+    case line@CJ_Pattern() =>
+      val Array(comp, jump) = line.split(";").take(2)
+      val dest = "null"
+      "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump) case _ => None
   }
 
   /**
    * ex)
    *    "@16" => "0000000000010000"
    */
-  def addressBinary(address: String): Option[String] = {
-    address.toIntOption.flatMap(a => bin16(a).map('0' + _.mkString.tail).toOption)
+  val addressBinary: String => Option[String] ={
+    _.tail.toIntOption.flatMap{ address =>
+      bin16(address).map('0' + _.mkString.tail).toOption
+    }
   }
+
 }
