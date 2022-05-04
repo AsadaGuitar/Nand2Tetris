@@ -5,6 +5,7 @@ object AssemblyRegex {
   val labelPattern: Regex    = "\\(.+?\\)".r
   val aCommandPattern: Regex = "^@.*?$".r
   val numberPattern: Regex   = "^\\d+?$".r
+  val nextLinePattern: Regex = "\n|\r\n|\r".r
   val symbolPattern: Regex   = "^\\D.*$".r
   val mnemonicPattern: Regex = "^(?![a-z]).*$".r
   val commentPattern: Regex  = "^//.*$".r

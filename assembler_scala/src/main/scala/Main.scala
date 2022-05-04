@@ -37,16 +37,19 @@ object Main extends IOApp
           case line@aCommandPattern() => addressBinary(line)
           case line@mnemonicPattern() => commandBinary(line)
           case line => println(s"match error: $line"); None
-        }.sequence
-        IO(hackAssembly)
+        }
+        IO(hackAssembly.sequence)
       }
       val outputFileName = getFileName(path) ++ ".hack"
       fileWriter(outputFileName).use{ out =>
         hack.map { asm =>
           asm.fold(println("Invalid assembly.")){ asm =>
-            asm.foreach(line => out.write((line + "\n").getBytes))
+            asm.foreach{ line =>
+              out.write((line + "\n").getBytes)
+            }
+            println("Converted to machine language.")
           }
-        } *> IO.println("Converted to machine language.")
+        }
       }.as(ExitCode.Success)
     case _ => IO.println("Invalid file extension.").as(ExitCode.Success)
   }
