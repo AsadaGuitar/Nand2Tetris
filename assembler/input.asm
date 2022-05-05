@@ -1,6 +1,0 @@
-@100
-@max
-@R0
-@SCREEN
-@R15
-@ARG
