@@ -1,12 +1,11 @@
 import cats.effect.{ExitCode, IO, IOApp, Resource}
-import cats.implicits.{catsSyntaxEq, toTraverseOps}
+import cats.implicits.catsSyntaxEq
 
 import java.io.FileOutputStream
 import scala.io.{BufferedSource, Source}
 
 object Main extends IOApp
   with ParserModule with SymbolTableModule with CodeModule {
-  import AssemblyRegex._
 
   def fileReader(path: String): Resource[IO, BufferedSource] =
     Resource.make {
@@ -31,14 +30,9 @@ object Main extends IOApp
     case None => IO.println("Invalid arguments.").as(ExitCode.Success)
     case Some(path) if path.split("\\.").lastOption.fold(false)(_==="asm") =>
       val hack: IO[Option[Seq[String]]] = fileReader(path).use{ in =>
-        val parsedAsm = this.parseAssembly(in.getLines().toSeq)
-        val assignedAsm = this.assignAddress(parsedAsm)
-        val hackAssembly = assignedAsm.map {
-          case line@aCommandPattern() => addressBinary(line)
-          case line@mnemonicPattern() => commandBinary(line)
-          case line => println(s"match error: $line"); None
-        }
-        IO(hackAssembly.sequence)
+        val assembler = parseAssembly andThen assignAddress andThen assemblyBinary
+        val hackAssembly = assembler(in.getLines().toSeq)
+        IO(hackAssembly)
       }
       val outputFileName = getFileName(path) ++ ".hack"
       fileWriter(outputFileName).use{ out =>
@@ -47,7 +41,7 @@ object Main extends IOApp
             asm.foreach{ line =>
               out.write((line + "\n").getBytes)
             }
-            println("Converted to machine language.")
+            println(s"Converted to machine language from $outputFileName.")
           }
         }
       }.as(ExitCode.Success)

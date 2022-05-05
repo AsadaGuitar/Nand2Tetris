@@ -2,9 +2,8 @@ import cats.implicits.catsSyntaxEq
 
 object SymbolTableModule {
 
-  abstract class Symbol(val name: String, val address: Int)
-  case class Label(override val name: String, override val address: Int) extends Symbol(name,address)
-  case class Variable(override val name: String, override val address: Int) extends Symbol(name,address)
+  case class Label(name: String, address: Int)
+  case class Variable(name: String, address: Int)
 }
 
 trait SymbolTableModule {
@@ -12,7 +11,7 @@ trait SymbolTableModule {
   import AssemblyRegex._
   import Utility._
 
-  def assignAddress(assembly: Seq[String]): Seq[String] ={
+  val assignAddress: Seq[String] => Seq[String] = (assembly: Seq[String]) => {
 
     val labels = {
       var count = -1
@@ -26,15 +25,24 @@ trait SymbolTableModule {
     val variables = {
       var count = 1023
       assembly.filter { line =>
-        aCommandPattern.matches(line) && !labels.exists(_.name === line.tail)
+        aCommandPattern.matches(line) &&
+          !labels.exists(_.name === line.tail)
       }.map { line =>
         val symbol = line.tail
-        if (numberPattern.matches(symbol)) {
-          Variable(symbol,symbol.toInt)
-        } else {
-          count += 1
-          Variable(line.tail, count)
-        }
+        Variable(symbol, {
+          symbol match {
+            case "SP"     => 0
+            case "LCL"    => 1
+            case "ARG"    => 2
+            case "THIS"   => 3
+            case "THAT"   => 4
+            case "SCREEN" => 16384
+            case "KBD"    => 24576
+            case registerPattern(_) => symbol.tail.toInt
+            case numberPattern(_)   => symbol.toInt
+            case _ => count += 1; count
+          }
+        })
       }
     }
 

@@ -1,22 +1,6 @@
 @100
-D=A
-M=D
-@count
-M = 0
-D = M
-//Hello
 @max
-M = 1
-(LOOP)
-@count
-M = M + 1
-D = M
-@max
-D = A - D
-@LOOP
-D; JEQ
-@END
-0; JMP
-(END)
-@END
-0;JMP
+@R0
+@SCREEN
+@R15
+@ARG

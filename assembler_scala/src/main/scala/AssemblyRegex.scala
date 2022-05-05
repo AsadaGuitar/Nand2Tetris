@@ -12,4 +12,5 @@ object AssemblyRegex {
   val DCJ_Pattern: Regex     = ".*=.*;.*".r
   val DC_Pattern: Regex      = ".*=.*".r
   val CJ_Pattern: Regex      = ".*;.*".r
+  val registerPattern: Regex = "^R([0-9]|[1][0-5])".r
 }

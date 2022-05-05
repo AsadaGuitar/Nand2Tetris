@@ -64,11 +64,7 @@ trait CodeModule {
   import AssemblyRegex._
   import Utility._
 
-  /**
-   * ex)
-   *    "D=M" => "1110 0011 0000 1000"
-   */
-  val commandBinary: String => Option[String] ={
+  private val commandBinary: String => Option[String] ={
     case line@DCJ_Pattern() =>
       val Array(dest, temp) = line.split("=").take(2)
       val Array(comp, jump) = temp.split(";").take(2)
@@ -83,14 +79,17 @@ trait CodeModule {
       "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump) case _ => None
   }
 
-  /**
-   * ex)
-   *    "@16" => "0000000000010000"
-   */
-  val addressBinary: String => Option[String] ={
+  private val addressBinary: String => Option[String] ={
     _.tail.toIntOption.flatMap{ address =>
       bin16(address).map('0' + _.mkString.tail).toOption
     }
   }
 
+  val assemblyBinary: Seq[String] => Option[Seq[String]] ={
+    _.map{
+      case line@aCommandPattern() => addressBinary(line)
+      case line@mnemonicPattern() => commandBinary(line)
+      case _ => None
+    }.sequence
+  }
 }

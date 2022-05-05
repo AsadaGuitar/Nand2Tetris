@@ -19,8 +19,6 @@ object ParserModule {
 trait ParserModule {
   import ParserModule._
 
-  def parseAssembly(assembly: Seq[String]): Seq[String] ={
+  val parseAssembly: Seq[String] => Seq[String] = moldAssembly(_).filter(validateAssembly)
 
-    moldAssembly(assembly).filter(validateAssembly)
-  }
 }
