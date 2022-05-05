@@ -1,24 +1,19 @@
-object ParserModule {
+trait ParserModule {
   import AssemblyRegex._
 
-  val removeSpace: Seq[String] => Seq[String] = _.map(_.replace(" ", ""))
+  private val removeSpace = (_: Seq[String]).map(_.replace(" ", ""))
 
-  val removeComment: Seq[String] => Seq[String] = _.filter(!commentPattern.matches(_)).map(_.split("//").head)
+  private val removeComment = (_: Seq[String]).filter(!commentPattern.matches(_)).map(_.split("//").head)
 
-  val removeEmptyLine: Seq[String] => Seq[String] = _.filter(_.nonEmpty)
+  private val removeEmptyLine = (_: Seq[String]).filter(_.nonEmpty)
 
-  val moldAssembly: Seq[String] => Seq[String] = removeSpace compose removeComment compose removeEmptyLine
+  private val moldAssembly = removeSpace compose removeComment compose removeEmptyLine
 
-  val validateAssembly: String => Boolean = {
+  private val validateAssembly: String => Boolean = {
     case line@labelPattern()    => symbolPattern.matches(line)
     case line@aCommandPattern() => symbolPattern.matches(line) || numberPattern.matches(line)
     case line => mnemonicPattern.matches(line)
   }
-}
-
-trait ParserModule {
-  import ParserModule._
 
   val parseAssembly: Seq[String] => Seq[String] = moldAssembly(_).filter(validateAssembly)
-
 }

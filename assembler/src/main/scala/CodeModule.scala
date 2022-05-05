@@ -2,7 +2,7 @@ import cats.implicits._
 
 object CodeModule {
 
-  val destBinary: String => Option[String] ={
+  private val destBinary: String => Option[String] ={
     case "null" => "000".some
     case "M"    => "001".some
     case "D"    => "010".some
@@ -14,7 +14,7 @@ object CodeModule {
     case _      => None
   }
 
-  val compBinary: String => Option[String] ={
+  private val compBinary: String => Option[String] ={
     case "0"   => "0101010".some
     case "1"   => "0111111".some
     case "-1"  => "0111010".some
@@ -46,7 +46,7 @@ object CodeModule {
     case _     => None
   }
 
-  val jumpBinary: String => Option[String] ={
+  private val jumpBinary: String => Option[String] ={
     case "null" => "000".some
     case "JGT"  => "001".some
     case "JEQ"  => "010".some
@@ -79,17 +79,15 @@ trait CodeModule {
       "111".some |+| destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump) case _ => None
   }
 
-  private val addressBinary: String => Option[String] ={
-    _.tail.toIntOption.flatMap{ address =>
-      bin16(address).map('0' + _.mkString.tail).toOption
-    }
+  private val addressBinary = (_: String).tail.toIntOption.flatMap{ address =>
+    bin16(address).map('0' + _.mkString.tail).toOption
   }
 
-  val assemblyBinary: Seq[String] => Option[Seq[String]] ={
+  val assemblyBinary: Seq[String] => Seq[Option[String]] ={
     _.map{
       case line@aCommandPattern() => addressBinary(line)
       case line@mnemonicPattern() => commandBinary(line)
       case _ => None
-    }.sequence
+    }
   }
 }
