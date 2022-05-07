@@ -1,0 +1,8 @@
+time:2022-5月-07 13:47:40.611 level:INFO  thread:io-compute-7 logger:Main message:Logging Start Something
+time:2022-5月-07 14:09:28.292 level:INFO  thread:io-compute-3 logger:Main message:Logging Start Something
+time:2022-5月-07 14:10:36.309 level:INFO  thread:io-compute-1 logger:Main message:Logging Start Something
+time:2022-5月-07 14:10:36.328 level:INFO  thread:io-compute-1 logger:Main message:Something is success.
+time:2022-5月-07 15:38:01.614 level:INFO  thread:io-compute-8 logger:Main message:start main.
+time:2022-5月-07 15:38:01.617 level:INFO  thread:io-compute-8 logger:Main message:Logging Start Something
+time:2022-5月-07 15:38:01.631 level:INFO  thread:io-compute-8 logger:Main message:Something is success.
+time:2022-5月-07 15:38:01.631 level:INFO  thread:io-compute-8 logger:Main message:end main.

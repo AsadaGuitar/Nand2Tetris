@@ -10,7 +10,7 @@ trait SymbolTableModule {
   import SymbolTableModule._
   import AssemblyRegex._
   import Utility._
-  
+
   val assignAddress: Seq[String] => Seq[String] = (assembly: Seq[String]) => {
 
     val labels = {
