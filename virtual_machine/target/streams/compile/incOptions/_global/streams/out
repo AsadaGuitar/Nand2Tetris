@@ -6,6 +6,11 @@
 [0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ArithmeticCommand.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VmRegex$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ArithmeticCommand$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Parser.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VmRegex.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/target/scala-2.13/classes.bak[0m
