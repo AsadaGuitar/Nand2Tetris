@@ -1,0 +1,11 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(all {file:/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/}root/products {file:/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/}root/test:products, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / products, Test / products[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 2 Scala sources to /Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/target/scala-2.13/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/Main.scala:17:58: unbound placeholder parameter[0m
+[0m[[0m[31merror[0m] [0m[0m  def word: Parser[String]   = """[a-z]+""".r       ^^ { _ }[0m
+[0m[[0m[31merror[0m] [0m[0m                                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 0 s, completed 2022/05/10 23:15:00[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
