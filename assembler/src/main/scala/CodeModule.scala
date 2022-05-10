@@ -1,6 +1,35 @@
 import cats.implicits._
 
+import scala.annotation.tailrec
+
 object CodeModule {
+
+  trait AssemblyLine {
+    protected def bin16(number: Int): Either[IndexOutOfBoundsException, Array[Int]] = {
+      val bin = new Array[Int](16)
+      @tailrec
+      def loop(n: Int, idx: Int = 15): Either[IndexOutOfBoundsException, Array[Int]] = {
+        if (n < 2) {
+          bin(idx) = n % 2
+          Right(bin)
+        } else {
+          bin(idx) = n % 2
+          if (idx == 0) {
+            Left(new IndexOutOfBoundsException("IndexOutOfBoundsException from 'bin16'."))
+          }
+          loop(n / 2, idx -1)
+        }
+      }
+      loop(number)
+    }
+    def toBinary: Int
+  }
+  abstract class CommandA(symbol: String) extends AssemblyLine {
+    // @symbol => bin
+  }
+  abstract class CommandB(mnemonic: String) extends AssemblyLine {
+    // M=D => bin
+  }
 
   private val destBinary: String => Option[String] ={
     case "null" => "000".some

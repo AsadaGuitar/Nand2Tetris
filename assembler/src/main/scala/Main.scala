@@ -2,10 +2,13 @@ import cats.effect.{ExitCode, IO, IOApp, Resource}
 import cats.implicits.{catsSyntaxEq, toTraverseOps}
 
 import java.io.FileOutputStream
+import scala.annotation.tailrec
 import scala.io.{BufferedSource, Source}
 
 object Main extends IOApp
   with ParserModule with SymbolTableModule with CodeModule {
+
+
 
   private def fileReader(path: String): Resource[IO, BufferedSource] =
     Resource.make {
