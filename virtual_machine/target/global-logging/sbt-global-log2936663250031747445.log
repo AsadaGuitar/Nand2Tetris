@@ -1,0 +1,29 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(all {file:/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/}root/products {file:/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/}root/test:products, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / products, Test / products[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 4 Scala sources to /Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/target/scala-2.13/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:13:31: missing parameter type for expanded function ((x$1: Int, <x$2: error>) => (<x$1: error>: Int).$plus(x$2))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "add" => ((_: Int) + _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:14:31: missing parameter type for expanded function ((x$3: Int, <x$4: error>) => (<x$3: error>: Int).$minus(x$4))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "sub" => ((_: Int) - _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:15:32: missing parameter type for expanded function ((x$5: Int, <x$6: error>) => (<x$5: error>: Int).$eq$eq$eq(x$6))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "eq" => ((_: Int) === _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:16:30: missing parameter type for expanded function ((x$7: Int, <x$8: error>) => (<x$7: error>: Int).$greater(x$8))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "gt" => ((_: Int) > _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:17:30: missing parameter type for expanded function ((x$9: Int, <x$10: error>) => (<x$9: error>: Int).$less(x$10))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "lt" => ((_: Int) < _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:18:31: missing parameter type for expanded function ((x$11: Int, <x$12: error>) => (<x$11: error>: Int).$amp(x$12))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "and" => ((_: Int) & _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/virtual_machine/src/main/scala/ArithmeticCommand.scala:19:30: missing parameter type for expanded function ((x$13: Int, <x$14: error>) => (<x$13: error>: Int).$bar(x$14))[0m
+[0m[[0m[31merror[0m] [0m[0m    case "or" => ((_: Int) | _).some[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m7 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed 2022/05/09 7:37:27[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m

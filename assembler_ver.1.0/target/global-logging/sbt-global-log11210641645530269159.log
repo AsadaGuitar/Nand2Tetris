@@ -1,0 +1,35 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(all {file:/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/}root/products {file:/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/}root/test:products, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / products, Test / products[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/target/scala-2.13/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:75:75: missing parameter type for expanded function ((<x$4: error>, x$5, x$6) => x$4.$plus$plus(x$5).$plus$plus(x$6))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:75:80: missing parameter type for expanded function ((<x$4: error>, <x$5: error>, x$6) => x$4.$plus$plus(x$5).$plus$plus(x$6))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:75:85: missing parameter type for expanded function ((<x$4: error>, <x$5: error>, <x$6: error>) => x$4.$plus$plus(x$5).$plus$plus(x$6))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:81:75: missing parameter type for expanded function ((<x$8: error>, x$9, x$10) => x$8.$plus$plus(x$9).$plus$plus(x$10))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:81:80: missing parameter type for expanded function ((<x$8: error>, <x$9: error>, x$10) => x$8.$plus$plus(x$9).$plus$plus(x$10))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:81:85: missing parameter type for expanded function ((<x$8: error>, <x$9: error>, <x$10: error>) => x$8.$plus$plus(x$9).$plus$plus(x$10))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:86:75: missing parameter type for expanded function ((<x$12: error>, x$13, x$14) => x$12.$plus$plus(x$13).$plus$plus(x$14))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:86:80: missing parameter type for expanded function ((<x$12: error>, <x$13: error>, x$14) => x$12.$plus$plus(x$13).$plus$plus(x$14))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/peace/Projects/Learning/cs/nand2tetris/assembler_scala/src/main/scala/CodeModule.scala:86:85: missing parameter type for expanded function ((<x$12: error>, <x$13: error>, <x$14: error>) => x$12.$plus$plus(x$13).$plus$plus(x$14))[0m
+[0m[[0m[31merror[0m] [0m[0m        (destBinary(dest) |+| compBinary(comp) |+| jumpBinary(jump)) map {_ ++ _ ++ _}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m9 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed 2022/05/01 8:36:22[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m

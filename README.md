@@ -9,9 +9,18 @@
 5. Computer,CPU等の作成
 6. 高級言語でのアセンブラ実装
 
-### parse.bat
+## 成果物
+### ./parse.bat
 CPUの動作確認用プログラム。<br>
 引数に16bit命令文を代入し実行すると、インデントと各bitの属性を表示する。
 
-### projects/05/CPU/hack_cpu.drawio
+### ./projects/05/CPU/hack_cpu.drawio
 CPUの論理回路図。
+
+### ./assembler
+アセンブラ。<br>
+プログラム引数にアセンブリ言語が記述された入力ファイルを受取り、対応したhack機械語を出力する。
+
+### ./virtual_machine
+仮想マシン。<br>
+vmファイルをasmにvm変換した後にhaskファイルを生成し実行する。
