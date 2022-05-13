@@ -1,0 +1,19 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\assembler_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\Main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ParserModule.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\ParserModule.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ParserModule.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes\ParserModule.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

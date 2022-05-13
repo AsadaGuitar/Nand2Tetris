@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\src\main\scala\Main.scala:21:7 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m21 |[0m    r1.forearch(println)[0m
+[0m[[0m[31merror[0m] [0m[0m   |    [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |value forearch is not a member of Iterable[String] - did you mean r1.foreach?[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
