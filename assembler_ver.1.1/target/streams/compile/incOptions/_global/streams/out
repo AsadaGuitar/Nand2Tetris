@@ -3,27 +3,39 @@
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$given_Strict_Option$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Strict.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$given_Strict_Option$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Strict.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$given_Strict_Option$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Strict.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$given_Strict_Option$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Strict.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$given_Strict_Option$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Strict.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$given_Strict_Option$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Strict.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\target\scala-3.1.2\classes.bak[0m
