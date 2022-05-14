@@ -1,5 +1,2 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\d.takahashi\Document\Projects\Scala\assembler\assembler\src\main\scala\Main.scala:28:16 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m28 |[0m    [33mval[0m [36mr1[0m = r0.strict[0m
-[0m[[0m[31merror[0m] [0m[0m   |             [31m^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |value strict is not a member of Iterable[Option[String]] - did you mean r0.slice?[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[0mdebug[0m] [0m[0mAcquiring lock on file /Users/peace/Projects/Learning/cs/nand2tetris/assembler_ver.1.1/project/target/.sbt-compilation-infos/root-compile/.sbt-idea-lock ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mReleasing lock on file /Users/peace/Projects/Learning/cs/nand2tetris/assembler_ver.1.1/project/target/.sbt-compilation-infos/root-compile/.sbt-idea-lock.[0m

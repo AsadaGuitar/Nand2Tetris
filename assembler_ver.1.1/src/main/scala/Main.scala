@@ -1,30 +1,37 @@
-import cats._
-import cats.data._
-import cats.implicits._
-import cats.syntax.all._
-import cats.effect._
-import cats.kernel.instances.all. _
+import cats.*
+import cats.data.*
+import cats.implicits.*
+import cats.effect.*
+import cats.kernel.instances.all.*
+
 import scala.language.postfixOps
+import lib.StrictOne
+import lib.syntax.OptionSyntax.{*, given}
+
+import scala.annotation.tailrec
+import scala.collection.mutable
+import scala.collection.mutable.Seq as MutSeq
 
 
+object Main extends App, ParserModule, SymbolTableModule:
+  val assembly = Vector (
+    "@COUNT",
+    "M=1",
+    "",
+    "// comment",
+    "@100",
+    "D = M",
+    "@COUNT // count of function",
+    "D = M + D",
+    "(Symbol)",
+    "@R1",
+    "M=D",
+    "@Symbol",
+    "D = M"
+  )
+  val start = System.currentTimeMillis()
+  val parsed = this.parseAssembly(assembly)
+  val end = System.currentTimeMillis()
+  println(s"TIME: ${end - start}")
 
-trait Strict[F[_]]:
-  extension [A](a: F[A]) def strict(using Monad[F], Monoid[A], Eq[A]): F[A]
 
-given Strict[Option] with
-   extension [A](a: Option[A]) def strict(using Monad[Option], Monoid[A], Eq[A]): Option[A] =
-    a.flatMap{
-        case b if Monoid[A].isEmpty(b) => None
-        case b => Some(b)
-    }
-
-extension [A, F[_]](a: Traversable[F[A]])(using Monad[F], Strict[F])
-  def strictAll(using Monoid[A], Eq[A]): Traversable[F[A]] = a.map(_.strict)
-
-object Main extends IOApp, ParserModule:
-  def run(args: List[String]): IO[ExitCode] =
-    val r0: Iterable[Option[String]] = 
-      moldAssembly(List("hello", "//hello", "hello//world", "helloworld//", ""))
-    val r1 = r0.strictAll
-    r1.foreach(println)
-    IO.println("HELLO WORLD").as(ExitCode.Success)
