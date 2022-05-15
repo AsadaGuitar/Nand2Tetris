@@ -31,12 +31,12 @@ object ParserModule:
 trait ParserModule extends JavaTokenParsers:
     import AssemblyLine._
     import ParserModule._
-    private def symbolParser = not(numberPattern) ~> rep1("""[a-zA-Z]|_|\.|:""".r | numberPattern).map(_.mkString(""))
-    private def numberParser = rep(numberPattern).map(_.mkString(""))
+    def symbolParser = not(numberPattern) ~> rep1("""[a-zA-Z]|_|\.|:""".r | numberPattern).map(_.mkString(""))
+    def numberParser = rep1(numberPattern).map(_.mkString(""))
     def parseAssembly(line: String): ParseResult[AssemblyLine] = parseAll(assemblyParser, line)
     def assemblyParser: Parser[AssemblyLine] = commandCParser | commandAParser | labelParser
     def labelParser   : Parser[Label] = "(" ~> symbolParser <~ ")" ^^ { symbol => Label(symbol) }
-    def commandAParser: Parser[CommandA] = "@" ~> (numberParser | symbolParser) ^^ { symbol => CommandA(symbol) }
+    def commandAParser: Parser[CommandA] = "@" ~> (symbolParser | numberParser) ^^ { symbol => CommandA(symbol) }
     def commandCParser: Parser[CommandC] = opt(destPattern <~ "=") ~ compPattern ~ opt(";" ~> jumpPattern) ^^ {
         case dest ~ comp ~ jump => CommandC(dest, comp, jump)
     }
