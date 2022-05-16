@@ -16,9 +16,11 @@ import scala.collection.mutable.Seq as MutSeq
 
 
 object Main extends App, ParserModule, SymbolTableModule:
+  import AssemblyLine._ 
   val start = System.currentTimeMillis()
-  val r = parseAll(commandCParser, "D=M;JMP")
-  println(r)
+  val r = "^(\\-|\\!)[1ADM]$".r
+  println(r.matches("-A"))
+  println(parseAll(commandCParser, "M=D"))
   val end = System.currentTimeMillis()
   println(s"TIME: ${end - start}")
 

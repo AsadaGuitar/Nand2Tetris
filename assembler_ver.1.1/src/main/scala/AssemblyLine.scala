@@ -2,7 +2,8 @@ import lib._
 
 object AssemblyLine:
    abstract class AssemblyLine
-   case class CommandA(address: String) extends AssemblyLine
-   case class CommandC(dest: Option[String], comp: String, jump: Option[String]) extends AssemblyLine
+   abstract class Instruction extends AssemblyLine
+   case class CommandA(address: String) extends Instruction
+   case class CommandC(dest: Option[String], comp: String, jump: Option[String]) extends Instruction
    case class Label(symbol: String) extends AssemblyLine
    

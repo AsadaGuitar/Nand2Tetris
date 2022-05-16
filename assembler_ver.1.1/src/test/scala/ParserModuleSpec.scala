@@ -7,59 +7,107 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with
    * labelParser: 'success pattern
    */
   "labelParser" should "Can extract the jump destination of hack assembler." in {
-    assert(parseAll(labelParser, "(HELLO)").successful)
-    assert(parseAll(labelParser, "(Hello)").successful)
-    assert(parseAll(labelParser, "(hello)").successful)
-    assert(parseAll(labelParser, "(Hello5)").successful)
-    assert(parseAll(labelParser, "(hello5)").successful)
-    assert(parseAll(labelParser, "(He5llo)").successful)
-    assert(parseAll(labelParser, "(he5llo)").successful)
+    def test(data: String) = assert(parseAll(labelParser, data).successful)
+    test("(Hello)")
+    test("(Hello5)")
+    test("(He5llo)")
+    test("(:Hel_lo.)")
+    test("(_He.llo:)")
+    test("(.Hel:lo_)")
   }
   /**
    * labelParser: 'failure pattern
    */
   it should "Fails if not enclosed in parentheses or if the first character is a number." in {
-    assert(!parseAll(labelParser, " ").successful)
-    assert(!parseAll(labelParser, "HELLO").successful)
-    assert(!parseAll(labelParser, "(HELLO").successful)
-    assert(!parseAll(labelParser, "HELLO)").successful)
-    assert(!parseAll(labelParser, "()").successful)
-    assert(!parseAll(labelParser, "(123)").successful)
-    assert(!parseAll(labelParser, "(123HELLO)").successful)
-    assert(!parseAll(labelParser, "((HELLO))").successful)
+    def test(data: String) = assert(!parseAll(labelParser, data).successful)
+    test("")
+    test(" ")
+    test("HELLO")
+    test("(HELLO")
+    test("HELLO)")
+    test("()")
+    test("(123)")
+    test("(123HELLO)")
+    test("((HELLO))")
   }
 
   /**
    * commandAParser: 'success pattern
    */
   "commandAParser" should "Can extract 'A instruction' of hack assembler." in {
-    assert(parseAll(commandAParser, "@HELLO").successful)
-    assert(parseAll(commandAParser, "@Hello").successful)
-    assert(parseAll(commandAParser, "@hello").successful)
-    assert(parseAll(commandAParser, "@HELLO5").successful)
-    assert(parseAll(commandAParser, "@Hello5").successful)
-    assert(parseAll(commandAParser, "@hello5").successful)
-    assert(parseAll(commandAParser, "@HEL5LO").successful)
-    assert(parseAll(commandAParser, "@Hel5lo").successful)
-    assert(parseAll(commandAParser, "@hel5lo").successful)
-    assert(parseAll(commandAParser, "@.HEL:LO_").successful)
-    assert(parseAll(commandAParser, "@:He_llo.").successful)
-    assert(parseAll(commandAParser, "@_hel.lo:").successful)
-    assert(parseAll(commandAParser, "@1").successful)
-    assert(parseAll(commandAParser, "@123").successful)
+    def test(data: String) = assert(parseAll(commandAParser, data).successful)
+    test("@Hello")
+    test("@hello5")
+    test("@Hel5lo")
+    test("@.HEL:LO_")
+    test("@:He_llo.")
+    test("@_hel.lo:")
+    test("@123")
   }
   /**
    * commandAParser: 'failure pattern
    */
   it should "Fails if leading @ is not present or if a number is entered after @." in {
-    assert(!parseAll(commandAParser, " ").successful)
-    assert(!parseAll(commandAParser, "@").successful)
-    assert(!parseAll(commandAParser, "HELLO").successful)
-    assert(!parseAll(commandAParser, "@5HELLO").successful)
-    assert(!parseAll(commandAParser, "@HE@LLO").successful)
-    assert(!parseAll(commandAParser, "@HELLO@").successful)
-    assert(!parseAll(commandAParser, "HEL@LO").successful)
-    assert(!parseAll(commandAParser, "@@").successful)
+    def test(data: String) = assert(!parseAll(commandAParser, data).successful)
+    test("")
+    test(" ")
+    test("@")
+    test("HELLO")
+    test("@5hello")
+    test("@He@llo")
+    test("He@llo")
+    test("@@")
   }
 
+  /**
+   * commandCParser: 'success pattern
+   */
+  "commandCParser" should "Can extract 'C instruction' of hack assembly." in {
+    def test(data: String) = assert(parseAll(commandCParser, data).successful)
+    // dest=comp;jump
+    test("M=-A;null")
+    test("null=0;JMP")
+    test("AMD=M-1;JLT")
+    // dest=comp
+    test("A=D|M")
+    test("MD=A")
+    test("null=M+A")
+    test("AM=0")
+    test("D=!D")
+    // comp;jump
+    test("0;JMP")
+    test("M;null")
+    test("A&M;JEQ")
+    test("D+M;JGT")
+  }
 
+  it should "Fails when a non mnemonic C instruction is received." in {
+    def test(data: String) = assert(!parseAll(commandCParser, data).successful)
+    // empty
+    test("")
+    // whitespace
+    test(" ")
+    // dest=comp;jump
+    test(" = ;")
+    test("B=A;null")
+    test("M=+D;JMP")
+    test("M=-D;TEST")
+    test(" =-D;JMP")
+    test("AMD= ;JEQ")
+    test("A=A+1; ")
+    // dest=comp
+    test(" = ")
+    test("D= ")
+    test(" =M")
+    test("E=A+1")
+    test("A=E")
+    test("MD=10")
+    test("D=D|1")
+    test("D=M&0")
+    // comp;jump
+    test(" ; ")
+    test("A+1;JUMP")
+    // dest=jump
+    // dest;jump
+    // dest=comp=jump
+  }
