@@ -3,11 +3,6 @@ import org.scalatest.diagrams.Diagrams
 import org.scalatest.PrivateMethodTester
 
 class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with PrivateMethodTester:
-
-  "symbolParser" should "" in {
-    assert(parseAll(symbolParser, "HELLO").successful)
-  }
-
   /**
    * labelParser: 'success pattern
    */

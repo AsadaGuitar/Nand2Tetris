@@ -9,17 +9,19 @@ import AssemblyLine._
 
 
 object ParserModule:
-    private val numberPattern = "\\d".r
-    private val symbolPattern = "^([a-zA-Z]|_|\\.|:).+".r
-    private val destPattern   = "null|M|D|MD|A|AM|AD|AMD|".r
-    private val compPattern   =
+    private val numberPattern = "^\\d+$".r
+    val symbolPattern   = """(?!^[0-9].*$)[^\\(\\)@][a-zA-Z0-9_:\\.]*""".r
+    val mnemonicPattern = """(^(.+=)?.+;.*$)|(^.*=.+(;.+)?$)""".r
+    val destPattern     = """^null|M|D|MD|A|AM|AD|AMD$""".r
+    val jumpPattern     = """^null|JGT|JEQ|JGE|JLT|JNE|JLE|JMP$""".r
+    val compPattern     =
         """^0|
-          |^(\\-|\\!)?(1|A|D|M|)|
-          |D((\\+|\\-)(1|A|M)|(\\&|\\|)(A|M))|
-          |A((\\+|\\-)(1|D|M)|(\\&|\\|)(D|M))|
-          |M((\\+|\\-)(1|A|D)|(\\&|\\|)(A|D))
+          |^[\\-|\\!]?[1ADM]$|
+          |^D(([\\+\\-][1AM])|([\\&\\|][AM]))$|
+          |^A(([\\+\\-][1DM])|([\\&\\|][DM]))$|
+          |^M(([\\+\\-][1AD])|([\\&\\|][AD]))$
           |""".r
-    private val jumpPattern   = "null|JGT|JEQ|JGE|JLT|JNE|JLE|JMP".r
+    
     def moldAssembly(assembly: Iterable[String]): Iterable[String] =
         assembly.map{ line =>
             line.split("//").headOption.map { line =>
@@ -31,12 +33,11 @@ object ParserModule:
 trait ParserModule extends JavaTokenParsers:
     import AssemblyLine._
     import ParserModule._
-    def symbolParser = not(numberPattern) ~> rep1("""[a-zA-Z]|_|\.|:""".r | numberPattern).map(_.mkString(""))
-    def numberParser = rep1(numberPattern).map(_.mkString(""))
     def parseAssembly(line: String): ParseResult[AssemblyLine] = parseAll(assemblyParser, line)
-    def assemblyParser: Parser[AssemblyLine] = commandCParser | commandAParser | labelParser
-    def labelParser   : Parser[Label] = "(" ~> symbolParser <~ ")" ^^ { symbol => Label(symbol) }
-    def commandAParser: Parser[CommandA] = "@" ~> (symbolParser | numberParser) ^^ { symbol => CommandA(symbol) }
+    def assemblyParser: Parser[AssemblyLine]   = commandCParser | commandAParser | labelParser
+    def labelParser   : Parser[Label]    = "(" ~> symbolPattern <~ ")" ^^ { symbol => Label(symbol) }
+    def commandAParser: Parser[CommandA] = "@" ~> (symbolPattern | numberPattern) ^^ { symbol => CommandA(symbol) }
     def commandCParser: Parser[CommandC] = opt(destPattern <~ "=") ~ compPattern ~ opt(";" ~> jumpPattern) ^^ {
-        case dest ~ comp ~ jump => CommandC(dest, comp, jump)
-    }
+            case line@dest ~ comp ~ jump => CommandC(dest, comp, jump)
+        }
+

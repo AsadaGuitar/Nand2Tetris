@@ -10,7 +10,6 @@ import lib.syntax.OptionSyntax.{*, given}
 
 import scala.util.parsing.combinator._
 
-
 import scala.annotation.tailrec
 import scala.collection.mutable
 import scala.collection.mutable.Seq as MutSeq
@@ -18,6 +17,8 @@ import scala.collection.mutable.Seq as MutSeq
 
 object Main extends App, ParserModule, SymbolTableModule:
   val start = System.currentTimeMillis()
+  val r = parseAll(commandCParser, "D=M;JMP")
+  println(r)
   val end = System.currentTimeMillis()
   println(s"TIME: ${end - start}")
 
