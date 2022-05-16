@@ -1,1 +1,0 @@
-C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\assembler\target\debug\assembler.exe: C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\assembler\src\lib.rs C:\Users\d.takahashi\Document\Projects\cs\nand2tetris\assembler\src\main.rs
