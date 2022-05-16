@@ -3,7 +3,7 @@
 
 ./tools/
 
-machineLangParser/.ide/
+machineLangParser/.idea/
 machineLangParser/.bsp/
 machineLangParser/utils/
 machineLangParser/target/streams/
