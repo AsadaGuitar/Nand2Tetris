@@ -39,8 +39,8 @@ trait ParserModule extends JavaTokenParsers:
         opt(destPattern <~ "=") ~ compParser ~ opt(";" ~> jumpPattern) ^^ { 
             case dest ~ comp ~ jump => 
                 AssignedC(
-                    dest.flatMap(operand => FindByOperand[Dest].find(operand)),
+                    dest.flatMap(FindByOperand[Dest].find),
                     FindByOperand[Comp].find(comp).get,
-                    jump.flatMap(operand => FindByOperand[Jump].find(operand))   
+                    jump.flatMap(FindByOperand[Jump].find)   
                 )
         }
