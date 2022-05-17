@@ -1,6 +1,6 @@
 package assembler.data
 
-import assembler.data.Binary._
+import lib.BinaryConvertor
 
 import cats.*
 import cats.data._
@@ -15,6 +15,24 @@ import scala.language.postfixOps
 
 object Mnemonic:
 
+  object FindByOperand:
+    @inline def apply[A](using instance: FindByOperand[A]): FindByOperand[A] = instance
+
+  trait FindByOperand[A]:
+    def find(operand: String): Option[A]
+
+  given FindByOperand[Dest] with
+    def find(operand: String): Option[Dest] =
+      Dest.values.find(_.operand === operand)
+
+  given FindByOperand[Comp] with
+    def find(operand: String): Option[Comp] =
+      Comp.values.find(_.operand === operand)
+  
+  given FindByOperand[Jump] with
+    def find(operand: String): Option[Jump] =
+      Jump.values.find(_.operand === operand)
+      
   extension [A <: Mnemonic](mnemonic: Option[A])
     def orElseEmpty(using Empty[A]): A = mnemonic.getOrElse(Empty[A].empty)
 
@@ -27,9 +45,9 @@ object Mnemonic:
   given Empty[Jump] with
     override def empty: Jump = Jump.NULL
 
-  abstract class Mnemonic(val binary: Binary, val operand: String)
+  abstract class Mnemonic(val binary: Array[Boolean], val operand: String)
 
-  enum Dest(binary: Binary, operand: String) extends Mnemonic(binary, operand):
+  enum Dest(binary: Array[Boolean], operand: String) extends Mnemonic(binary, operand):
     case NULL     extends Dest("000", "null")
     case PURE_M   extends Dest("001", "M")
     case PURE_D   extends Dest("010", "D")
@@ -39,7 +57,7 @@ object Mnemonic:
     case PURE_AD  extends Dest("110", "AD")
     case PURE_AMD extends Dest("111", "AMD")
 
-  enum Comp(binary: Binary, operand: String) extends Mnemonic(binary, operand):
+  enum Comp(binary: Array[Boolean], operand: String) extends Mnemonic(binary, operand):
     case ZERO        extends Comp("0101010", "0")
     case ONE         extends Comp("0111111", "1")
     case MINUS_ONE   extends Comp("0111010", "-1")
@@ -69,7 +87,7 @@ object Mnemonic:
     case D_AND_M     extends Comp("1000000", "D&M")
     case D_OR_M      extends Comp("1010101", "D|M")
 
-  enum Jump(binary: Binary, operand: String) extends Mnemonic(binary, operand):
+  enum Jump(binary: Array[Boolean], operand: String) extends Mnemonic(binary, operand):
     case JGT  extends Jump("000", "JGT")
     case JEQ  extends Jump("001", "JEQ")
     case JGE  extends Jump("010", "JGE")

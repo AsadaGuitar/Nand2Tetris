@@ -1,8 +1,12 @@
+package assembler.module
+
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.diagrams.Diagrams
 import org.scalatest.PrivateMethodTester
 
-class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with PrivateMethodTester:
+import assembler.module.ParserModule
+
+class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with PrivateMethodTester:
   /**
    * labelParser: 'success pattern
    */
@@ -35,7 +39,7 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with
    * commandAParser: 'success pattern
    */
   "commandAParser" should "Can extract 'A instruction' of hack assembler." in {
-    def test(data: String) = assert(parseAll(commandAParser, data).successful)
+    def test(data: String) = assert(parseAll(instructionAParser, data).successful)
     test("@Hello")
     test("@hello5")
     test("@Hel5lo")
@@ -48,7 +52,7 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with
    * commandAParser: 'failure pattern
    */
   it should "Fails if leading @ is not present or if a number is entered after @." in {
-    def test(data: String) = assert(!parseAll(commandAParser, data).successful)
+    def test(data: String) = assert(!parseAll(instructionAParser, data).successful)
     test("")
     test(" ")
     test("@")
@@ -63,7 +67,7 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with
    * commandCParser: 'success pattern
    */
   "commandCParser" should "Can extract 'C instruction' of hack assembly." in {
-    def test(data: String) = assert(parseAll(commandCParser, data).successful)
+    def test(data: String) = assert(parseAll(instructionCParser, data).successful)
     // dest=comp;jump
     test("M=-A;null")
     test("null=0;JMP")
@@ -82,7 +86,7 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with
   }
 
   it should "Fails when a non mnemonic C instruction is received." in {
-    def test(data: String) = assert(!parseAll(commandCParser, data).successful)
+    def test(data: String) = assert(!parseAll(instructionCParser, data).successful)
     // empty
     test("")
     // whitespace
@@ -107,7 +111,4 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams  with
     // comp;jump
     test(" ; ")
     test("A+1;JUMP")
-    // dest=jump
-    // dest;jump
-    // dest=comp=jump
   }

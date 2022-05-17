@@ -3,30 +3,25 @@ package lib.syntax
 import cats.*
 import cats.data.*
 import cats.implicits.*
+import lib.BinaryConvertor
+
+import scala.annotation.tailrec
+import scala.language.implicitConversions
+
 
 object IntSyntax:
-  extension (n: Int) 
-    def toBooleanOption: Option[Boolean] =
-      if n === 1 then Some(true)
-      else if n === 0 then Some(false)
-      else None
-    def binary(using instance: BinaryConverter[Int]): Binary = instance.binary(n)
+  given Conversion[Int,Boolean] with
+    override def apply(x: Int): Boolean =
+      if x === 0 then false else true
 
-  @tailrec
-  def binary(n: Int, bin: List[Int] = List.empty[Int]): List[Int] =
-    if n / 2 == 1 then 1 :: (n % 2) :: bin
-    else
-      val q = n / 2; val r = n % 2
-      binary(q, r :: bin)
-  binary(number).toArray
-
-  given BinaryConvertor[Int]:
-    def binary(number: Int): Binary =
+  given BinaryConvertor[Int] with
+    def binary(number: Int): Array[Boolean] =
       @tailrec
-      def loop(n: Int, bin: List[Int] = List.empty[Int]): List[Int] =
-        if n / 2 == 1 then 1 :: (n % 2) :: bin
-        else
-          val q = n / 2; val r = n % 2
-          loop(q, r :: bin)
+      def loop(n: Int, bin: List[Boolean] = List.empty[Boolean]): List[Boolean] =
+        n / 2 match
+          case i if i < 2 => i +: bin
+          case _ =>
+            val r = n % 2; val q = n /2
+            loop(q, r +: bin)
       loop(number).toArray
-    def binaryOption(number: int): Option[Binary] = Some(binary(number))
+    def binaryOption(number: Int): Option[Array[Boolean]] = Some(binary(number))
