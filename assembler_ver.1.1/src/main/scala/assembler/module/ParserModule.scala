@@ -1,3 +1,5 @@
+package assembler.module
+
 import cats.*
 import cats.data.*
 import cats.implicits.*
@@ -5,7 +7,6 @@ import lib.StrictOne
 import lib.syntax.OptionSyntax.{*, given}
 
 import scala.util.parsing.combinator.*
-import AssemblyLine._
 
 
 object ParserModule:
@@ -29,7 +30,7 @@ object ParserModule:
 
 
 trait ParserModule extends JavaTokenParsers:
-    import AssemblyLine._
+    import assembler.data.AssemblyLine._
     import ParserModule._
     
     def parseAssembly(line: String): ParseResult[AssemblyLine] = parseAll(assemblyParser, line)

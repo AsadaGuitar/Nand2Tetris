@@ -1,10 +1,12 @@
+package assembler.module
+
 import cats.*
 import cats.data.*
 import cats.implicits.*
 
 import scala.annotation.tailrec
 
-import AssemblyLine._
+import assembler.data.AssemblyLine._
 
 case class AssemblySymbol(symbol: String, address: Int)
 
