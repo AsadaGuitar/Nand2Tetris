@@ -16,6 +16,7 @@ import scala.Enumeration
 
 
 object Mnemonic:
+  import lib.conversions.StringConversion.StringToBinary
 
   given Empty[Dest] with 
     def empty: Dest = Dest.NULL
@@ -23,7 +24,7 @@ object Mnemonic:
   object Dest:
     def findByOperand(operand: String): Option[Dest] = Dest.values.find(_.operand === operand)
 
-  enum Dest(val binary: Array[Boolean], val operand: String):
+  enum Dest(val binary: Seq[Boolean], val operand: String):
     case NULL     extends Dest("000", "null")
     case PURE_M   extends Dest("001", "M")
     case PURE_D   extends Dest("010", "D")
@@ -39,7 +40,7 @@ object Mnemonic:
   object Comp:
     def findByOperand(operand: String): Option[Comp] = Comp.values.find(_.operand === operand)
 
-  enum Comp(val binary: Array[Boolean], val operand: String):
+  enum Comp(val binary: Seq[Boolean], val operand: String):
     case ZERO        extends Comp("0101010", "0")
     case ONE         extends Comp("0111111", "1")
     case MINUS_ONE   extends Comp("0111010", "-1")
@@ -75,7 +76,7 @@ object Mnemonic:
   object Jump:
     def findByOperand(operand: String): Option[Jump] = Jump.values.find(_.operand === operand)
 
-  enum Jump(val binary: Array[Boolean], val operand: String):
+  enum Jump(val binary: Seq[Boolean], val operand: String):
     case JGT  extends Jump("000", "JGT")
     case JEQ  extends Jump("001", "JEQ")
     case JGE  extends Jump("010", "JGE")

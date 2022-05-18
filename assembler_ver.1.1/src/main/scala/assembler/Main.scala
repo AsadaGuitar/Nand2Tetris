@@ -12,8 +12,13 @@ import assembler.data.Mnemonic.{_, given}
 import lib.Empty._
 
 
-object Main extends App, ParserModule:
-  val testData = "@Symbol"
-  val rs = parseAll(instructionAParser, testData)
+import lib._
+import lib.syntax.StringSyntax.{_, given}
 
+
+
+object Main extends App, ParserModule:
+  val testData = "000"
+  val rs = BinaryConvertor[String].binary(testData)
+  println(rs)
 end Main

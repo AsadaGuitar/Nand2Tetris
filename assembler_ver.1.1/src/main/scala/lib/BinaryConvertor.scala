@@ -10,5 +10,4 @@ object BinaryConvertor:
 @implicitNotFound("Could not find an instance of BinnaryConvertor for {A}")
 @typeclass
 trait BinaryConvertor[A]:
-  def binary(a: A): Array[Boolean]
-  def binaryOption(a: A): Option[Array[Boolean]]
+  def binary(a: A): Seq[Boolean]
