@@ -19,8 +19,6 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
         assert(AssignedA(10).binary === Seq(true, false, true, false))
     }
 
-    // 16bit : Seq(false, false, false, false,  false, false, false, false
-    //              false, false, false, false,  false, false, false, false)
     "AssignedC#binary" should "can convert Option[Dest], Comp, Option[Jump] to Seq[Boolean]" in {
         assert {
             val test = AssignedC(None, Comp.ZERO, None).binary
