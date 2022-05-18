@@ -29,7 +29,7 @@ trait ParserModule extends JavaTokenParsers:
     import ParserModule._
     def moldAssembly(assembly: Iterable[String]): Iterable[String] =
         assembly.map{ line =>
-            line.split("//").headOption.map { _.replace(" ", Monoid[String].empty) }.strict
+            line.split("//").headOption.map(_.replace(" ", "")).strict
         }.flatten
     private def compParser = compD | compA | compM | compSglOp | compSgl
     def labelParser: Parser[PassedLabel] = "(" ~> symbolPattern <~ ")" ^^ { PassedLabel.apply }
