@@ -14,11 +14,11 @@ import lib.Empty._
 
 import lib._
 import lib.syntax.StringSyntax.{_, given}
-
+import lib.syntax.IntSyntax.{_, given}
 
 
 object Main extends App, ParserModule:
-  val testData = "000"
-  val rs = BinaryConvertor[String].binary(testData)
+  val testData = 0
+  val rs = BinaryConvertor[Int].binary(testData)
   println(rs)
 end Main
