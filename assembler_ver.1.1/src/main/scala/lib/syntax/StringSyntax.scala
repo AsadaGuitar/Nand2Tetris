@@ -22,3 +22,5 @@ object StringSyntax:
 
   given Conversion[String, Array[Boolean]] with
       def apply(string: String): Array[Boolean] = string.binary
+
+end StringSyntax

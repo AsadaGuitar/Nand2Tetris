@@ -8,7 +8,9 @@ import scala.annotation.tailrec
 
 import assembler.data.AssemblyLine._
 
+
 case class AssemblySymbol(symbol: String, address: Int)
+
 
 trait SymbolTableModule:
 //  def assignSymbol(assembly: List[AssemblyLine]): List[AssemblyLine] =

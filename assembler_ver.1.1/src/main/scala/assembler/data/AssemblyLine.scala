@@ -32,3 +32,5 @@ object AssemblyLine:
 
   case class AssignedC(dest: Option[Dest], comp: Comp, jump: Option[Jump]) extends AssignedInstruction:
     def binary: Array[Boolean] = dest.getOrEmpty.binary ++ comp.binary ++ jump.getOrEmpty.binary
+
+end AssemblyLine

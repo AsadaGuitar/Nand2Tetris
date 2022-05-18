@@ -5,6 +5,7 @@ import lib.StrictOne
 
 
 object OptionSyntax:
+
   extension [A](a: Option[A])(using StrictOne[Option])
     def strict(using Monoid[A], Eq[A]): Option[A] = StrictOne[Option].strict(a)
   
@@ -15,3 +16,4 @@ object OptionSyntax:
           case b => Some(b)
         }
     
+end OptionSyntax

@@ -25,3 +25,5 @@ object IntSyntax:
             loop(q, r +: bin)
       loop(number).toArray
     def binaryOption(number: Int): Option[Array[Boolean]] = Some(binary(number))
+
+end IntSyntax

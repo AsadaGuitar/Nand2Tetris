@@ -15,3 +15,5 @@ import lib.Empty._
 object Main extends App, ParserModule:
   val testData = "@Symbol"
   val rs = parseAll(instructionAParser, testData)
+
+end Main
