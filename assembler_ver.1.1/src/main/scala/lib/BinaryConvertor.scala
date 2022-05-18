@@ -1,7 +1,6 @@
 package lib
 
 import simulacrum.typeclass
-
 import scala.annotation.implicitNotFound
 
 
