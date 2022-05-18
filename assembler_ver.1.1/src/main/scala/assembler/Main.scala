@@ -11,7 +11,6 @@ import assembler.data.Mnemonic.{_, given}
 
 import lib.Empty._
 
-
 import lib._
 import lib.syntax.StringSyntax.{_, given}
 import lib.syntax.IntSyntax.{_, given}
