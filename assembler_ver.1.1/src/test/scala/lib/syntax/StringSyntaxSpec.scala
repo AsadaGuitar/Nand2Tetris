@@ -1,6 +1,5 @@
 package lib.syntax
 
-
 import cats._
 import cats.data._
 import cats.implicits._
@@ -21,7 +20,7 @@ class StringSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
       assert(BinaryConvertor[String].binary("101") === Seq(true, false, true))
   }
 
-  "Extension binary" should "is can to call form String." in {
+  "Extension binary" should "can call from String." in {
     assert("000".binary === Seq(false, false, false))
     assert("111".binary === Seq(true, true, true))
   }

@@ -12,8 +12,8 @@ object OptionSyntax:
   given StrictOne[Option] with
     def strict[A](a: Option[A])(using Monoid[A], Eq[A]): Option[A] =
       a.flatMap {
-          case b if Monoid[A].isEmpty(b) => None
-          case b => Some(b)
-        }
+        case b if Monoid[A].isEmpty(b) => None
+        case b => Some(b)
+      }
     
 end OptionSyntax
