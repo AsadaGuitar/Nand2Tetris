@@ -7,8 +7,11 @@ import cats.effect.*
 import cats.kernel.instances.all.*
 
 import assembler.module.ParserModule
+import assembler.data.Mnemonic.{_, given}
+
+import lib.Empty._
+
 
 object Main extends App, ParserModule:
-  val testData = "D=M+1"
-  val result = parseAll(instructionCParser, testData)
-  println(result)
+  val testData = "@Symbol"
+  val rs = parseAll(instructionAParser, testData)

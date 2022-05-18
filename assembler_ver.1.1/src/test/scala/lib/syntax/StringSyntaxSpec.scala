@@ -12,4 +12,6 @@ class StringSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
   
   "BinaryConvertor[String]" should "Can converte String to Array[Boolean]" in {
       assert(BinaryConvertor[String].binary("000") === Array(false, false, false))
+      assert(BinaryConvertor[String].binary("111") === Array(true, true, true))
+      
   }

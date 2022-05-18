@@ -12,42 +12,18 @@ import lib.syntax.StringSyntax.{*, given}
 import scala.language.implicitConversions
 import scala.language.postfixOps
 
+import scala.Enumeration
+
 
 object Mnemonic:
 
-  object FindByOperand:
-    @inline def apply[A](using instance: FindByOperand[A]): FindByOperand[A] = instance
+  given Empty[Dest] with 
+    def empty: Dest = Dest.NULL
+ 
+  object Dest:
+    def findByOperand(operand: String): Option[Dest] = Dest.values.find(_.operand === operand)
 
-  trait FindByOperand[A]:
-    def find(operand: String): Option[A]
-
-  given FindByOperand[Dest] with
-    def find(operand: String): Option[Dest] =
-      Dest.values.find(_.operand === operand)
-
-  given FindByOperand[Comp] with
-    def find(operand: String): Option[Comp] =
-      Comp.values.find(_.operand === operand)
-  
-  given FindByOperand[Jump] with
-    def find(operand: String): Option[Jump] =
-      Jump.values.find(_.operand === operand)
-      
-  extension [A <: Mnemonic](mnemonic: Option[A])
-    def orElseEmpty(using Empty[A]): A = mnemonic.getOrElse(Empty[A].empty)
-
-  given Empty[Dest] with
-    override def empty: Dest = Dest.NULL
-
-  given Empty[Comp] with
-    override def empty: Comp = Comp.ZERO
-
-  given Empty[Jump] with
-    override def empty: Jump = Jump.NULL
-
-  abstract class Mnemonic(val binary: Array[Boolean], val operand: String)
-
-  enum Dest(binary: Array[Boolean], operand: String) extends Mnemonic(binary, operand):
+  enum Dest(val binary: Array[Boolean], val operand: String):
     case NULL     extends Dest("000", "null")
     case PURE_M   extends Dest("001", "M")
     case PURE_D   extends Dest("010", "D")
@@ -57,7 +33,13 @@ object Mnemonic:
     case PURE_AD  extends Dest("110", "AD")
     case PURE_AMD extends Dest("111", "AMD")
 
-  enum Comp(binary: Array[Boolean], operand: String) extends Mnemonic(binary, operand):
+  given Empty[Comp] with 
+    def empty: Comp = Comp.ZERO
+
+  object Comp:
+    def findByOperand(operand: String): Option[Comp] = Comp.values.find(_.operand === operand)
+
+  enum Comp(val binary: Array[Boolean], val operand: String):
     case ZERO        extends Comp("0101010", "0")
     case ONE         extends Comp("0111111", "1")
     case MINUS_ONE   extends Comp("0111010", "-1")
@@ -87,7 +69,13 @@ object Mnemonic:
     case D_AND_M     extends Comp("1000000", "D&M")
     case D_OR_M      extends Comp("1010101", "D|M")
 
-  enum Jump(binary: Array[Boolean], operand: String) extends Mnemonic(binary, operand):
+  given Empty[Jump] with 
+    def empty: Jump = Jump.NULL
+
+  object Jump:
+    def findByOperand(operand: String): Option[Jump] = Jump.values.find(_.operand === operand)
+
+  enum Jump(val binary: Array[Boolean], val operand: String):
     case JGT  extends Jump("000", "JGT")
     case JEQ  extends Jump("001", "JEQ")
     case JGE  extends Jump("010", "JGE")

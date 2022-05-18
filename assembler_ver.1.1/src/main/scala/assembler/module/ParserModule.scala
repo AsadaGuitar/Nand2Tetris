@@ -7,6 +7,9 @@ import cats.implicits.*
 import lib.StrictOne
 import lib.syntax.OptionSyntax.{*, given}
 
+import assembler.data.AssemblyLine._
+import assembler.data.Mnemonic.{_, given}
+
 import scala.util.parsing.combinator.*
 
 
@@ -24,8 +27,6 @@ object ParserModule:
 
 trait ParserModule extends JavaTokenParsers:
     import ParserModule._
-    import assembler.data.AssemblyLine._
-    import assembler.data.Mnemonic.{_, given}
     def moldAssembly(assembly: Iterable[String]): Iterable[String] =
         assembly.map{ line =>
             line.split("//").headOption.map { line =>
@@ -33,14 +34,14 @@ trait ParserModule extends JavaTokenParsers:
             }.strict
         }.flatten
     private def compParser = compD | compA | compM | compSglOp | compSgl
-    def labelParser: Parser[PassedLabel] = "(" ~> symbolPattern <~ ")" ^^ { symbol => PassedLabel(symbol) }
-    def instructionAParser: Parser[PassedA] = "@" ~> (symbolPattern | numberPattern) ^^ { symbol => PassedA(symbol) }
+    def labelParser: Parser[PassedLabel] = "(" ~> symbolPattern <~ ")" ^^ { PassedLabel.apply }
+    def instructionAParser: Parser[PassedA] = "@" ~> (symbolPattern | numberPattern) ^^ { PassedA.apply }
     def instructionCParser: Parser[AssignedC] = guard(mnemonicPattern) ~>
         opt(destPattern <~ "=") ~ compParser ~ opt(";" ~> jumpPattern) ^^ { 
             case dest ~ comp ~ jump => 
                 AssignedC(
-                    dest.flatMap(FindByOperand[Dest].find),
-                    FindByOperand[Comp].find(comp).get,
-                    jump.flatMap(FindByOperand[Jump].find)   
+                    dest.flatMap(Dest.findByOperand),
+                    Comp.findByOperand(comp).get,
+                    jump.flatMap(Jump.findByOperand)   
                 )
         }

@@ -1,6 +1,7 @@
 package assembler.data
 
 import lib.*
+import lib.Empty._
 import lib.syntax.IntSyntax.{_, given}
 import lib.syntax.StringSyntax.{_, given}
 
@@ -30,4 +31,4 @@ object AssemblyLine:
     def binary: Array[Boolean] = BinaryConvertor[Int].binary(number)
 
   case class AssignedC(dest: Option[Dest], comp: Comp, jump: Option[Jump]) extends AssignedInstruction:
-    def binary: Array[Boolean] = dest.orElseEmpty.binary ++ comp.binary ++ jump.orElseEmpty.binary
+    def binary: Array[Boolean] = dest.getOrEmpty.binary ++ comp.binary ++ jump.getOrEmpty.binary
