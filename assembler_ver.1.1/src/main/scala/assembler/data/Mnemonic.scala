@@ -6,7 +6,6 @@ import cats.*
 import cats.data._
 import cats.implicits.*
 
-import lib.Empty
 import lib.syntax.StringSyntax.{*, given}
 
 import scala.language.implicitConversions

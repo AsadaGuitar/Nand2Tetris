@@ -1,7 +1,6 @@
 package assembler.data
 
 import lib.*
-import lib.Empty._
 import lib.syntax.IntSyntax.{_, given}
 import lib.syntax.StringSyntax.{_, given}
 
