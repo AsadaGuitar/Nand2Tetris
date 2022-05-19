@@ -17,9 +17,6 @@ import scala.Enumeration
 
 object Mnemonic:
   import lib.conversions.StringConversion.StringToBinary
-
-  given Empty[Dest] with 
-    def empty: Dest = Dest.NULL
  
   object Dest:
     def findByOperand(operand: String): Option[Dest] = Dest.values.find(_.operand === operand)
@@ -33,9 +30,6 @@ object Mnemonic:
     case PURE_AM  extends Dest("101", "AM")
     case PURE_AD  extends Dest("110", "AD")
     case PURE_AMD extends Dest("111", "AMD")
-
-  given Empty[Comp] with 
-    def empty: Comp = Comp.ZERO
 
   object Comp:
     def findByOperand(operand: String): Option[Comp] = Comp.values.find(_.operand === operand)
@@ -69,9 +63,6 @@ object Mnemonic:
     case M_MINUS_D   extends Comp("1000111", "M-D")
     case D_AND_M     extends Comp("1000000", "D&M")
     case D_OR_M      extends Comp("1010101", "D|M")
-
-  given Empty[Jump] with 
-    def empty: Jump = Jump.NULL
 
   object Jump:
     def findByOperand(operand: String): Option[Jump] = Jump.values.find(_.operand === operand)
