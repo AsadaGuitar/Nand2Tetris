@@ -16,15 +16,15 @@ import scala.util.parsing.combinator.*
 
 object ParserModule:
     private val numberPattern   = "^\\d+$".r
-    private val mnemonicPattern = """(^[!\\-]?.$)|(^(.+=)?.+;.*$)|(^.*=.+(;.+)?$)""".r
-    private val symbolPattern   = """(?!^[0-9].*$)[^\\()@][a-zA-Z0-9_:\\.]*""".r
-    private val destPattern     = """^(AMD|MD|AM|AD|null|M|D|A)""".r
+    private val mnemonicPattern = "(^[!\\-]?.$)|(^(.+=)?.+;.*$)|(^.*=.+(;.+)?$)".r
+    private val symbolPattern   = "(?!^[0-9].*$)[^\\()@][a-zA-Z0-9_:\\.]*".r
+    private val destPattern     = "^(AMD|MD|AM|AD|null|M|D|A)".r
     private val compD           = "^D(([+\\-][1AM])|([&|][AM]))".r
     private val compA           = "^(A\\-1)|(A\\+[D1])".r
     private val compM           = "^M(([+\\-][1])|(\\-D)|([&|][D]))".r
     private val compSglOp       = "(^-1)|(^[!\\-][ADM])".r
     private val compSgl         = "^[AMD0]".r
-    private val jumpPattern     = """^null|JGT|JEQ|JGE|JLT|JNE|JLE|JMP$""".r
+    private val jumpPattern     = "^null|JGT|JEQ|JGE|JLT|JNE|JLE|JMP$".r
 
 
 trait ParserModule extends JavaTokenParsers:

@@ -14,6 +14,14 @@ import lib.syntax.OptionSyntax.{_, given}
 
 class OptionSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTester:
 
+    /**
+     *  TestType:
+     *    All
+     *  Function: 
+     *    StrictOne[Option]#strict[A](a: Option[A])(using Monoid[A], Eq[A]): Option[A]
+     *  Description:
+     *    Can be converted to None if it holds an empty value.
+     */
     "StrictOne[Option]" should "can set the EMPTY element to None." in {
         assert(StrictOne[Option].strict(Some(1)) === Some(1))
         assert(StrictOne[Option].strict(Some("")) === None)
@@ -24,6 +32,14 @@ class OptionSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
         }
     }
 
+    /**
+     *  TestType:
+     *    All
+     *  Function: 
+     *    Option[A]#strict(using Monoid[A], Eq[A]): Option[A]
+     *  Description:
+     *    Can be converted to None if it holds an empty value.
+     */
     "Extension strict" should "can call from Option[A]." in {
         assert(Some(1).strict === Some(1))
         assert(Some(0).strict === None)

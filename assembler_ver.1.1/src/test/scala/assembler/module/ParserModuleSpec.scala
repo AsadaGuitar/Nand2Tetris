@@ -16,12 +16,8 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
   /**
    *  TestType:
    *    All
-   *  Name: 
-   *    moldAssemblyParser
-   *  Args:
-   *    Iterable[String]
-   *  Returns:
-   *    Iterable[String]
+   *  Function: 
+   *    ParserModule#moldAssembly(assembly: Iterable[String]): Iterable[String]
    *  Description:
    *    Remove whitespace and comments from all strings.
    */
@@ -36,10 +32,8 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
   /**
    *  TestType:
    *    Success
-   *  Name: 
-   *    labelParser
-   *  Returns:
-   *    Parser[PassedLabel]
+   *  Function: 
+   *    ParserModule#labelParser: Parser[PassedLabel]
    *  Description:
    *    Parser that can extract '(Label)' from Hack assembler.
    *  Data structures:
@@ -76,10 +70,8 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
   /**
    *  TestType:
    *    Failure
-   *  Name: 
-   *    labelParser
-   *  Returns:
-   *    Parser[PassedLabel]
+   *  Function: 
+   *    ParserModule#labelParser: Parser[PassedLabel]
    *  Description:
    *    Parser that can extract '(Label)' from Hack assembler.
    *  Data structures:
@@ -101,10 +93,8 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
   /**
    *  TestType:
    *    Success
-   *  Name: 
-   *    instructionAParser
-   *  Returns:
-   *    Parser[PassedA]
+   *  Function: 
+   *    ParserModule#instructionAParser: Parser[PassedA]
    *  Description:
    *    Parser that can extract '@Symbol' or '@Number' from Hack assembler.
    *  Data structures:
@@ -186,10 +176,8 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
   /**
    *  TestType:
    *    Failure
-   *  Name: 
-   *    instructionAParser
-   *  Returns:
-   *    Parser[PassedA]
+   *  Function: 
+   *    ParserModule#instructionAParser: Parser[PassedA]
    *  Description:
    *    Parser that can extract '@Symbol' or '@Number' from Hack assembler.
    *  Data structures:
@@ -209,11 +197,9 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
 
   /**
    *  TestType:
-   *    Successs
-   *  Name: 
-   *    instructionCParser
-   *  Returns:
-   *    Parser[AssignedC]
+   *    Success
+   *  Function: 
+   *    ParserModule#instructionCParser: Parser[AssignedC]
    *  Description:
    *    Parser that can extract assembler's mnemonic from Hack assembler.
    *  Data structures:
@@ -267,10 +253,8 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
   /**
    *  TestType:
    *    Failure
-   *  Name: 
-   *    instructionCParser
-   *  Returns:
-   *    Parser[AssignedC]
+   *  Function: 
+   *    ParserModule#instructionCParser: Parser[AssignedC]
    *  Description:
    *    Parser that can extract assembler's mnemonic from Hack assembler.
    *  Data structures:

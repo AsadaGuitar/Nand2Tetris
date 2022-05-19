@@ -14,6 +14,14 @@ import lib.syntax.IntSyntax.{_, given}
 
 class IntSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTester:
 
+    /**
+     *  TestType:
+     *    All
+     *  Function: 
+     *    BinaryContertor[Int]#binary(a: A): Seq[Boolean]
+     *  Description:
+     *    Can convert from numeric to binary.
+     */
     "BinaryContertor[Int]" should "can convert Int to Seq[Boolean]." in {
         assert(BinaryConvertor[Int].binary(0) === Seq(false))
         assert(BinaryConvertor[Int].binary(1) === Seq(true))
