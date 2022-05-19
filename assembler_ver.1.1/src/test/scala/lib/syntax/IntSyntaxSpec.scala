@@ -20,5 +20,3 @@ class IntSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTester:
         assert(BinaryConvertor[Int].binary(2) === Seq(true, false))
         assert(BinaryConvertor[Int].binary(8) === Seq(true,false,false,false))
     }
-
-end IntSyntaxSpec

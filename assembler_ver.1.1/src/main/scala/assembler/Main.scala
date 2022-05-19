@@ -7,6 +7,9 @@ import cats.effect.*
 import cats.kernel.instances.all.*
 
 import assembler.module.ParserModule
+
+import assembler.data.AssemblyLine.{_, given}
+import assembler.data.Symbol.{_, given}
 import assembler.data.Mnemonic.{_, given}
 
 import lib.Empty._
@@ -17,7 +20,7 @@ import lib.syntax.IntSyntax.{_, given}
 
 
 object Main extends App, ParserModule:
-  val testData = 0
-  val rs = BinaryConvertor[Int].binary(testData)
-  println(rs)
-end Main
+  val testData = "!M"
+  val expected = AssignedC(Dest.NULL, Comp.NOT_M, Jump.NULL)
+  val r = parseAll(instructionCParser, testData)
+  println(r)

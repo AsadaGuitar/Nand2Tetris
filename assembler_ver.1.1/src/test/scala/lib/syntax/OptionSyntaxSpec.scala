@@ -33,5 +33,3 @@ class OptionSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test.strict.isEmpty
         }
     }
-
-end OptionSyntaxSpec

@@ -16,4 +16,3 @@ object OptionSyntax:
         case b => Some(b)
       }
     
-end OptionSyntax

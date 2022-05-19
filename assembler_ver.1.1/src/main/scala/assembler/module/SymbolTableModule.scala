@@ -47,6 +47,3 @@ trait SymbolTableModule:
                         case anyAssigned@AssignedInstruction() => loop(tail, anyAssigned +: assigned, symbols, position+1, variable)
         end loop
         loop(assembly)
-    end assignAddress
-
-end SymbolTableModule

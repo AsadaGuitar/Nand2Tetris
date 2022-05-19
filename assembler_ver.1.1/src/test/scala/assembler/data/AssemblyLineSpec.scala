@@ -16,15 +16,31 @@ import lib.syntax.IntSyntax.{_, given}
 
 class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTester:
 
+    /**
+     *  TestType:
+     *    All
+     *  Function: 
+     *    AssignedA#binary(using BinaryConvertor[Int]): Seq[Boolean]
+     *  Description:
+     *    Convert assigned A instruction's number to binary.
+     */
     "AssignedA#binary" should "can convert Int to Seq[Boolean]" in {
         assert(AssignedA(0).binary === Seq(false))
         assert(AssignedA(2).binary === Seq(true, false))
         assert(AssignedA(10).binary === Seq(true, false, true, false))
     }
 
-    "AssignedC#binary" should "can convert Option[Dest], Comp, Option[Jump] to Seq[Boolean]" in {
+    /**
+     *  TestType:
+     *    All
+     *  Function: 
+     *    AssignedC#binary: Seq[Boolean]
+     *  Description:
+     *    Convert assigned C instruction's mnemonics to binary.
+     */
+    "AssignedC#binary" should "can convert Dest, Comp, Jump to Seq[Boolean]" in {
         assert {
-            val test = AssignedC(None, Comp.ZERO, None).binary
+            val test = AssignedC(Dest.NULL, Comp.ZERO, Jump.NULL).binary
             val expected = Seq(
                 true, true, true,
                 false, false, false, 
@@ -34,7 +50,7 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
         assert {
-            val test = AssignedC(None, Comp.ZERO, Some(Jump.JMP)).binary
+            val test = AssignedC(Dest.NULL, Comp.ZERO, Jump.JMP).binary
             val expected = Seq(
                 true, true, true,
                 false, false, false, 
@@ -44,7 +60,7 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
         assert {
-            val test = AssignedC(None, Comp.A_MINUS_D, None).binary
+            val test = AssignedC(Dest.NULL, Comp.A_MINUS_D, Jump.NULL).binary
             val expected = Seq(
                 true, true, true,
                 false, false, false, 
@@ -54,7 +70,7 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
         assert {
-            val test = AssignedC(None, Comp.A_PLUS_ONE, Some(Jump.JMP)).binary
+            val test = AssignedC(Dest.NULL, Comp.A_PLUS_ONE, Jump.JMP).binary
             val expected = Seq(
                 true, true, true,
                 false, false, false, 
@@ -64,7 +80,7 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
         assert {
-            val test = AssignedC(Some(Dest.PURE_MD), Comp.ZERO, None).binary
+            val test = AssignedC(Dest.PURE_MD, Comp.ZERO, Jump.NULL).binary
             val expected = Seq(
                 true, true, true,
                 false, true, true, 
@@ -74,7 +90,7 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
         assert {
-            val test = AssignedC(Some(Dest.PURE_M), Comp.ZERO, Some(Jump.JLT)).binary
+            val test = AssignedC(Dest.PURE_M, Comp.ZERO, Jump.JLT).binary
             val expected = Seq(
                 true, true, true,
                 false, false, true, 
@@ -84,7 +100,7 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
         assert {
-            val test = AssignedC(Some(Dest.PURE_A), Comp.M_MINUS_D, Some(Jump.JGT)).binary
+            val test = AssignedC(Dest.PURE_A, Comp.M_MINUS_D, Jump.JGT).binary
             val expected = Seq(
                 true, true, true,
                 true, false, false, 
@@ -94,5 +110,3 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
             test === expected
         }
     }
-
-end AssemblyLineSpec

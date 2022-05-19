@@ -24,5 +24,3 @@ class StringSyntaxSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
     assert("000".binary === Seq(false, false, false))
     assert("111".binary === Seq(true, true, true))
   }
-
-end StringSyntaxSpec

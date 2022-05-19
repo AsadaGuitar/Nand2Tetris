@@ -23,5 +23,3 @@ object IntSyntax:
             val q = n /2
             loop(q, r +: bin)
       if number > 1 then loop(number) else Seq(number)
-
-end IntSyntax

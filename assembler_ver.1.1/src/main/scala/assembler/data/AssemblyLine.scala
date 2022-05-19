@@ -23,7 +23,7 @@ object AssemblyLine:
   
   extension (c: AssignedC)
     def binary: Seq[Boolean] = 
-      Seq(true, true, true) ++ c.dest.getOrEmpty.binary ++ c.comp.binary ++ c.jump.getOrEmpty.binary
+      Seq(true, true, true) ++ c.dest.binary ++ c.comp.binary ++ c.jump.binary
 
   sealed abstract class PassedInstruction
 
@@ -34,10 +34,9 @@ object AssemblyLine:
   
   sealed abstract class AssignedInstruction extends PassedInstruction
 
-  case class PassedA(line: Int | String) extends PassedInstruction
+  case class PassedA(variable: Int | String) extends PassedInstruction
 
   case class AssignedA(number: Int) extends AssignedInstruction
 
-  case class AssignedC(dest: Option[Dest], comp: Comp, jump: Option[Jump]) extends AssignedInstruction
+  case class AssignedC(dest: Dest, comp: Comp, jump: Jump) extends AssignedInstruction
    
-end AssemblyLine

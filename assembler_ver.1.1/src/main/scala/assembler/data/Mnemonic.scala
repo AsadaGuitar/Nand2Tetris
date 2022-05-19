@@ -85,5 +85,3 @@ object Mnemonic:
     case JLE  extends Jump("101", "JLE")
     case JMP  extends Jump("110", "JMP")
     case NULL extends Jump("111", "null")
-
-end Mnemonic

@@ -19,4 +19,3 @@ object StringSyntax:
         if char === '0' then false else true
       }
     
-end StringSyntax
