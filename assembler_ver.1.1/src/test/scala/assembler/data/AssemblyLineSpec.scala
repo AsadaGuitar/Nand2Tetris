@@ -9,7 +9,10 @@ import org.scalatest.diagrams.Diagrams
 import org.scalatest.PrivateMethodTester
 
 import assembler.data.Mnemonic.{_, given}
-import assembler.data.AssemblyLine._
+import assembler.data.AssemblyLine.{_, given}
+
+import lib.syntax.IntSyntax.{_, given}
+
 
 class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTester:
 

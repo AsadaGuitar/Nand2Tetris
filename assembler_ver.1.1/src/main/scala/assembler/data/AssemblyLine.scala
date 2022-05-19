@@ -18,20 +18,26 @@ import scala.annotation.tailrec
 
 object AssemblyLine:
 
+  extension (a: AssignedA)
+    def binary(using BinaryConvertor[Int]): Seq[Boolean] = BinaryConvertor[Int].binary(a.number)
+  
+  extension (c: AssignedC)
+    def binary: Seq[Boolean] = 
+      Seq(true, true, true) ++ c.dest.getOrEmpty.binary ++ c.comp.binary ++ c.jump.getOrEmpty.binary
+
   sealed abstract class PassedInstruction
 
   sealed case class PassedLabel(line: String) extends PassedInstruction
+
+  object AssignedInstruction:
+    def unapply(a: AssignedInstruction): true = true
   
-  sealed abstract class AssignedInstruction extends PassedInstruction:
-    def binary: Seq[Boolean]
+  sealed abstract class AssignedInstruction extends PassedInstruction
 
-  case class PassedA(line: String) extends PassedInstruction
+  case class PassedA(line: Int | String) extends PassedInstruction
 
-  case class AssignedA(number: Int) extends AssignedInstruction:
-    def binary: Seq[Boolean] = BinaryConvertor[Int].binary(number)
+  case class AssignedA(number: Int) extends AssignedInstruction
 
-  case class AssignedC(dest: Option[Dest], comp: Comp, jump: Option[Jump]) extends AssignedInstruction:
-    def binary: Seq[Boolean] = 
-      Seq(true, true, true) ++ dest.getOrEmpty.binary ++ comp.binary ++ jump.getOrEmpty.binary
-
+  case class AssignedC(dest: Option[Dest], comp: Comp, jump: Option[Jump]) extends AssignedInstruction
+   
 end AssemblyLine

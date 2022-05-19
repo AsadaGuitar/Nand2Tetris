@@ -9,6 +9,7 @@ import lib.syntax.OptionSyntax.{*, given}
 
 import assembler.data.AssemblyLine._
 import assembler.data.Mnemonic.{_, given}
+import assembler.data.Symbol
 
 import scala.util.parsing.combinator.*
 
@@ -25,15 +26,25 @@ object ParserModule:
     private val compSgl         = "^[AMD0]".r
     private val jumpPattern     = """^null|JGT|JEQ|JGE|JLT|JNE|JLE|JMP$""".r
 
+
 trait ParserModule extends JavaTokenParsers:
     import ParserModule._
+
     def moldAssembly(assembly: Iterable[String]): Iterable[String] =
         assembly.map{ line =>
             line.split("//").headOption.map(_.replace(" ", "")).strict
         }.flatten
+    
     private def compParser = compA | compD | compM | compSglOp | compSgl
+    
     def labelParser: Parser[PassedLabel] = "(" ~> symbolPattern <~ ")" ^^ { PassedLabel.apply }
-    def instructionAParser: Parser[PassedA] = "@" ~> (symbolPattern | numberPattern) ^^ { PassedA.apply }
+    
+    def instructionAParser: Parser[PassedA] = "@" ~> (symbolPattern | numberPattern) ^^ { symbol => 
+        Symbol.findAddress(symbol) match 
+            case None => PassedA(symbol)
+            case Some(address) => PassedA(address)
+    }
+    
     def instructionCParser: Parser[AssignedC] = guard(mnemonicPattern) ~>
         opt(destPattern <~ "=") ~ compParser ~ opt(";" ~> jumpPattern) ^^ { 
             case dest ~ comp ~ jump => 
