@@ -7,6 +7,7 @@ import cats.effect.*
 import cats.kernel.instances.all.*
 
 import assembler.module.ParserModule
+import assembler.module.SymbolTableModule
 
 import assembler.data.AssemblyLine.{_, given}
 import assembler.data.Symbol.{_, given}
@@ -19,8 +20,6 @@ import lib.syntax.StringSyntax.{_, given}
 import lib.syntax.IntSyntax.{_, given}
 
 
-object Main extends App, ParserModule:
-  val testData = "!M"
-  val expected = AssignedC(Dest.NULL, Comp.NOT_M, Jump.NULL)
-  val r = parseAll(instructionCParser, testData)
+object Main extends App, ParserModule, SymbolTableModule:
+  val r = findAddress("R1")
   println(r)

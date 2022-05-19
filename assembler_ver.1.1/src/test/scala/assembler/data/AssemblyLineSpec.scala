@@ -25,9 +25,33 @@ class AssemblyLineSpec extends AnyFlatSpec with Diagrams  with PrivateMethodTest
      *    Convert assigned A instruction's number to binary.
      */
     "AssignedA#binary" should "can convert Int to Seq[Boolean]" in {
-        assert(AssignedA(0).binary === Seq(false))
-        assert(AssignedA(2).binary === Seq(true, false))
-        assert(AssignedA(10).binary === Seq(true, false, true, false))
+        assert{
+            val expected = Seq(
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false
+            )
+            AssignedA(0).binary === expected
+        }
+        assert{
+            val expected = Seq(
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                false, false, true, false
+            )
+            AssignedA(2).binary === expected
+        }
+        assert{
+            val expected = Seq(
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                true, false, true, false
+            )
+            AssignedA(10).binary === expected
+        }
     }
 
     /**

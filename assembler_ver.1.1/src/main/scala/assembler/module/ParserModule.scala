@@ -41,11 +41,7 @@ trait ParserModule extends JavaTokenParsers:
 
     def labelParser: Parser[PassedLabel] = "(" ~> symbolPattern <~ ")" ^^ { PassedLabel.apply }
     
-    def instructionAParser: Parser[PassedA] = "@" ~> (symbolPattern | numberPattern) ^^ { symbol => 
-        PassedA(symbol.toIntOption.getOrElse{
-            Symbol.findAddress(symbol).getOrElse(symbol)
-        })
-    }
+    def instructionAParser: Parser[PassedA] = "@" ~> (symbolPattern | numberPattern) ^^ { PassedA.apply }
     
     def instructionCParser: Parser[AssignedC] = guard(mnemonicPattern) ~>
         opt(destPattern <~ "=") ~ compParser ~ opt(";" ~> jumpPattern) ^^ { 

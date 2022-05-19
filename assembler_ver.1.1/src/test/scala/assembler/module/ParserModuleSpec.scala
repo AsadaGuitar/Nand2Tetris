@@ -128,27 +128,12 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
     }
     assert{
       val r = parseAll(instructionAParser, "@123")
-      if r.successful then r.get.variable === 123
+      if r.successful then r.get.variable === "123"
       else false
     }
     assert{
       val r = parseAll(instructionAParser, "@R0")
-      if r.successful then r.get.variable === 0
-      else false
-    }
-    assert{
-      val r = parseAll(instructionAParser, "@9")
-      if r.successful then r.get.variable === 9
-      else false
-    }
-    assert{
-      val r = parseAll(instructionAParser, "@R10")
-      if r.successful then r.get.variable === 10
-      else false
-    }
-    assert{
-      val r = parseAll(instructionAParser, "@R15")
-      if r.successful then r.get.variable === 15
+      if r.successful then r.get.variable === "R0"
       else false
     }
     assert{
@@ -158,17 +143,7 @@ class ParserModuleSpec extends AnyFlatSpec with ParserModule with Diagrams with 
     }
     assert{
       val r = parseAll(instructionAParser, "@SP")
-      if r.successful then r.get.variable === 0
-      else false
-    }
-    assert{
-      val r = parseAll(instructionAParser, "@ARG")
-      if r.successful then r.get.variable === 2
-      else false
-    }
-    assert{
-      val r = parseAll(instructionAParser, "@SCREEN")
-      if r.successful then r.get.variable === 16384
+      if r.successful then r.get.variable === "SP"
       else false
     }
   }

@@ -19,7 +19,10 @@ import scala.annotation.tailrec
 object AssemblyLine:
 
   extension (a: AssignedA)
-    def binary(using BinaryConvertor[Int]): Seq[Boolean] = BinaryConvertor[Int].binary(a.number)
+    def binary(using BinaryConvertor[Int]): Seq[Boolean] = 
+      val temp = BinaryConvertor[Int].binary(a.number)
+      val div  = Seq.fill(16 - temp.length)(false)
+      div ++ temp
   
   extension (c: AssignedC)
     def binary: Seq[Boolean] = 
@@ -34,7 +37,7 @@ object AssemblyLine:
   
   sealed abstract class AssignedInstruction extends PassedInstruction
 
-  case class PassedA(variable: Int | String) extends PassedInstruction
+  case class PassedA(variable: String) extends PassedInstruction
 
   case class AssignedA(number: Int) extends AssignedInstruction
 
