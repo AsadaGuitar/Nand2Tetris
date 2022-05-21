@@ -8,3 +8,4 @@
 [0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 2022/05/22 1:11:55[0m
 [0m[[0m[0mdebug[0m] [0m[0munmatched Done event for requestId None: None[0m
 [0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mUnhandled request received: shutdown: JsonRpcRequestMessage(2.0, ♨1, shutdown, null})[0m

@@ -10,14 +10,9 @@ machineLangParser/target/streams/
 machineLangParser/target/global-logging/
 machineLangParser/target/task-temp-directory/
 
-assembler_ver.1.1/.idea/
-assembler_ver.1.1/.bsp/
-assembler_ver.1.1/project/
-assembler_ver.1.1/target/
-
-assembler_ver.1.0/.idea/
-assembler_ver.1.0/.bsp/
-assembler_ver.1.0/project/
-assembler_ver.1.0/target/
+assembler/.idea/
+assembler/.bsp/
+assembler/project/
+assembler/target/
 
 
