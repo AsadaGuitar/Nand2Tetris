@@ -23,7 +23,7 @@ object ParserModule:
     private val compA           = "^(A\\-1)|(A\\+[D1])".r
     private val compM           = "^M(([+\\-][1])|(\\-D)|([&|][D]))".r
     private val compSglOp       = "(^-1)|(^[!\\-][ADM])".r
-    private val compSgl         = "^[AMD0]".r
+    private val compSgl         = "^[AMD10]".r
     private val jumpPattern     = "^null|JGT|JEQ|JGE|JLT|JNE|JLE|JMP$".r
 
 
