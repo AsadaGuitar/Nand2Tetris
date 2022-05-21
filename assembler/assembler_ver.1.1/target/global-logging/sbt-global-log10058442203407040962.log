@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(run, Some(edb49d76-3324-4990-98ea-f6cee99cb2dc), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / run[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 3 Scala sources to /Users/peace/Projects/Learning/cs/nand2tetris/assembler_ver.1.1/target/scala-3.1.2/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E164] Declaration Error: /Users/peace/Projects/Learning/cs/nand2tetris/assembler_ver.1.1/src/main/scala/assembler/Main.scala:26:6 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m26 |[0m  [33mdef[0m [36mrun[0m([36margs[0m: [35mList[String][0m) =[0m
+[0m[[0m[31merror[0m] [0m[0m   |      [31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |error overriding [33mmethod[0m [35mrun[0m in [33mtrait[0m [35mSimple[0m of type (args: List[String]): cats.effect.IO[cats.effect.ExitCode];[0m
+[0m[[0m[31merror[0m] [0m[0m   |  [33mmethod[0m [35mrun[0m of type (args: List[String]): cats.effect.IO[cats.effect.ExitCode] cannot override final member [33mmethod[0m [35mrun[0m in [33mtrait[0m [35mSimple[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: /Users/peace/Projects/Learning/cs/nand2tetris/assembler_ver.1.1/src/main/scala/assembler/Main.scala:25:7 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m25 |[0m[33mobject[0m [35mMain[0m [33mextends[0m IOApp.Simple, [35mParserModule[0m, [35mSymbolTableModule[0m:[0m
+[0m[[0m[31merror[0m] [0m[0m   |       [31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |object creation impossible, since def run: cats.effect.IO[Unit] in [33mtrait[0m [35mSimple[0m in [33mobject[0m [35mIOApp[0m is not defined [0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 2 s, completed 2022/05/20 1:00:36[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
