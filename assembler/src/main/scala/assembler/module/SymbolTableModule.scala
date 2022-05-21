@@ -57,7 +57,7 @@ trait SymbolTableModule:
                                 case None => 
                                     findSymbol(symbol,variable,symbols) match
                                         case Left(newSymbols) => 
-                                            loop(tail, assigned, newSymbols, position+1, variable+1)
+                                            loop(tail, AssignedA(intToBinary(variable)) +: assigned, newSymbols, position+1, variable+1)
                                         case Right(address)   => 
                                             loop(tail, AssignedA(intToBinary(address)) +: assigned, symbols, position+1, variable)
                                 case Some(address) => 

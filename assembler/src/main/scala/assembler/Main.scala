@@ -43,7 +43,6 @@ object Main extends IOApp, ParserModule, SymbolTableModule:
     else None
 
   def run(args: List[String]): IO[ExitCode] =
-    val start = System.currentTimeMillis()
     args.headOption match
       case Some(inputPath) =>
         inputPathParser(inputPath) match 
@@ -56,6 +55,7 @@ object Main extends IOApp, ParserModule, SymbolTableModule:
               validateAssembly(assembly).map(assignAddress) match
                 case Invalid(messages) => IO { messages.map(println) }
                 case Valid(assigns)    => writer(outputPath).use { out => 
+                  println(s"assigns: $assigns")
                   IO{ assigns.map{ instruction => 
                     out.write(instruction.binary16.toString) 
                     out.newLine()
@@ -63,9 +63,6 @@ object Main extends IOApp, ParserModule, SymbolTableModule:
                 }
             }.handleErrorWith{ (e: Throwable) => 
               IO.println(e.getMessage)
-            } *> IO.println{
-              val end = System.currentTimeMillis()
-              s"Time: ${end - start}"
             }.as(ExitCode.Success)
           case _ => IO.println("Invalid input path.").as(ExitCode.Success)
       case None => IO.println("Not exist arguments.").as(ExitCode.Success)
