@@ -1,8 +1,8 @@
 package assembler
 
-import cats.*
-import cats.data.*
-import cats.implicits.*
+import cats._
+import cats.data._
+import cats.implicits._
 import cats.effect.*
 import cats.kernel.instances.all.*
 
@@ -18,17 +18,55 @@ import assembler.data.Symbol.{_, given}
 import assembler.data.Mnemonic.{_, given}
 
 import lib._
-import lib.syntax.StringSyntax.{_, given}
 import lib.syntax.IntSyntax.{_, given}
 
 
 object Main extends IOApp, ParserModule, SymbolTableModule:
-  def run(args: List[String]) =
-    val path = "./Test.f"    
-    
-    val bf: Resource[IO, BufferedReader] = 
-      Resource.fromAutoCloseable(IO(new BufferedReader(new FileReader(path))))
-    
-    val assembly = bf.use( bf => IO(bf.lines.iterator().asScala.toList)).attempt
+  import cats.data.Validated._
 
-    IO.println("").as(ExitCode.Success)
+  def reader(path: String) = Resource.fromAutoCloseable(IO(new BufferedReader(new FileReader(path))))
+  def writer(path: String) = Resource.fromAutoCloseable(IO(new BufferedWriter(new FileWriter(path))))
+    
+  def validateAssembly(assembly: Vector[String]): ValidatedNec[String, List[PassedInstruction]] = 
+    moldAssembly(assembly).zipWithIndex.map { (line, i) =>
+        parseAll(assemblyParser, line) match 
+        case Success(value, _) => value.validNec
+        case NoSuccess(msg, _) => s"syntax error, line ${i+1}: $msg.".invalidNec
+        case Failure(msg, _)   => s"failure, line ${i+1}: $msg.".invalidNec
+        case Error(msg, _)     => s"error, line ${i+1}: $msg.".invalidNec
+    }.toList.sequence
+
+  def inputPathParser(string: String): Option[String] =
+    val temp = string.split("\\.")
+    if 2 <= temp.length && temp(temp.length-1) === "asm" then
+      Some(temp.take(temp.length-1).mkString("."))
+    else None
+
+  given BinaryToString: Conversion[Seq[Boolean], String] with
+    override def apply(x: Seq[Boolean]): String = 
+      x.map(bit => if bit then "1" else 0).mkString("")
+
+  def run(args: List[String]): IO[ExitCode] =
+    args.headOption match
+      case Some(inputPath) =>
+        inputPathParser(inputPath) match 
+          case Some(inputPathName) => 
+            val outputPath = inputPathName + ".hack"
+            val readAssembly = reader(inputPath).use { bf =>
+              IO{ bf.lines.iterator().asScala.toVector }
+            }
+            readAssembly.flatMap{ assembly => 
+              validateAssembly(assembly).map(assignAddress) match
+                case Invalid(messages) => IO { messages.map(println) }
+                case Valid(assigns)    => writer(outputPath).use { out => 
+                  IO{ assigns.map{ instruction => 
+                    out.write(instruction.binary) 
+                    out.newLine()
+                  }}
+                }
+            }.handleErrorWith{ (e: Throwable) => 
+              IO.println(e.getMessage)
+            }.as(ExitCode.Success)
+          case _ => IO.println("Invalid input path.").as(ExitCode.Success)
+      case None => IO.println("Not exist arguments.").as(ExitCode.Success)
+
