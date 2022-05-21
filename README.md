@@ -17,7 +17,7 @@ CPUの動作確認用プログラム。<br>
 ### ./projects/05/CPU/hack_cpu.drawio
 CPUの論理回路図。
 
-### ./assembler_ver.1.1
+### ./assembler
 アセンブラ。<br>
 プログラム引数にアセンブリ言語が記述された入力ファイルを受取り、対応したhack機械語を出力する。
 
