@@ -7,10 +7,9 @@ import cats.*
 import cats.data.*
 import cats.implicits.*
 
-import lib.BinaryConvertor
 import assembler.data.Mnemonic._
-
-// import scala.language.implicitConversions
+import assembler.data.Binary.{_, given}
+import assembler.data.Symbol._
 
 
 object AssemblyLine:
@@ -23,15 +22,14 @@ object AssemblyLine:
     def unapply(a: AssignedInstruction): true = true
   
   abstract class AssignedInstruction extends PassedInstruction:
-    def binary: Seq[Boolean]
+    def binary16: Binary
 
   case class PassedA(variable: String) extends PassedInstruction
 
-  case class AssignedA(number: Int) extends AssignedInstruction:
-    val binary: Seq[Boolean] = 
-      val temp = BinaryConvertor[Int].binary(number)
-      Seq.fill(16 - temp.length)(false) ++ temp
+  case class AssignedA(binary: Binary) extends AssignedInstruction:
+    def binary16: Binary = 
+      val binaryString = Seq.fill(16 - binary.toString.length)("0").mkString("") + binary.toString
+      Binary(binaryString)
 
   case class AssignedC(dest: Dest, comp: Comp, jump: Jump) extends AssignedInstruction:
-    val binary: Seq[Boolean] = 
-      Seq(true, true, true) ++ dest.binary ++ comp.binary ++ jump.binary
+    def binary16: Binary = Binary("111") |+| dest.binary |+| comp.binary |+| jump.binary

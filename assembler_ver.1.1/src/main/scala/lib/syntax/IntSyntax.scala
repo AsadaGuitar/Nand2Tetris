@@ -3,23 +3,22 @@ package lib.syntax
 import cats.*
 import cats.data.*
 import cats.implicits.*
-import lib.BinaryConvertor
 
 import scala.annotation.tailrec
-import scala.language.implicitConversions
 
 
 object IntSyntax:
 
-  given BinaryConvertor[Int] with
-    import lib.conversions.IntConversion.{_, given}
-    def binary(number: Int): Seq[Boolean] =
+  extension (n: Int) 
+    def toBinaryString: String =
       @tailrec
-      def loop(n: Int, bin: Seq[Boolean] = Seq.empty[Boolean]): Seq[Boolean] =
+      def loop(n: Int, bin: Seq[String] = Seq.empty[String]): String =
         val r = n % 2
         n / 2 match
-          case i if i < 2 => i +: (r +: bin: Seq[Boolean])
+          case i if i < 2 => 
+            (i +: r +: bin).map(_.toString).mkString("")
           case _ =>
             val q = n /2
-            loop(q, r +: bin)
-      if number > 1 then loop(number) else Seq(number)
+            loop(q, r.toString +: bin)
+      if n > 1 then loop(n)
+      else n.toString

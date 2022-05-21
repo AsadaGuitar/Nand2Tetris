@@ -4,11 +4,10 @@ import cats.*
 import cats.data.*
 import cats.implicits.*
 
-import lib.syntax.{_, given}
-
+import lib.syntax.IntSyntax._
 
 object IntConversion:
 
-    given IntToBoolean: Conversion[Int,Boolean] with
-        override def apply(x: Int): Boolean =
-            if x === 0 then false else true
+    given IntToBinaryString: Conversion[Int, String] with
+        override def apply(x: Int): String = x.toBinaryString
+

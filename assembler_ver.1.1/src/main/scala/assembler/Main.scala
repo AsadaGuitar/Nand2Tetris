@@ -21,6 +21,13 @@ import lib._
 import lib.syntax.IntSyntax.{_, given}
 
 
+/*
+benchmark
+ver.1 => 150ms
+ver.2 => 151ms
+
+*/
+
 object Main extends IOApp, ParserModule, SymbolTableModule:
   import cats.data.Validated._
 
@@ -42,11 +49,8 @@ object Main extends IOApp, ParserModule, SymbolTableModule:
       Some(temp.take(temp.length-1).mkString("."))
     else None
 
-  given BinaryToString: Conversion[Seq[Boolean], String] with
-    override def apply(x: Seq[Boolean]): String = 
-      x.map(bit => if bit then "1" else 0).mkString("")
-
   def run(args: List[String]): IO[ExitCode] =
+    val start = System.currentTimeMillis()
     args.headOption match
       case Some(inputPath) =>
         inputPathParser(inputPath) match 
@@ -60,13 +64,15 @@ object Main extends IOApp, ParserModule, SymbolTableModule:
                 case Invalid(messages) => IO { messages.map(println) }
                 case Valid(assigns)    => writer(outputPath).use { out => 
                   IO{ assigns.map{ instruction => 
-                    out.write(instruction.binary) 
+                    out.write(instruction.binary16.toString) 
                     out.newLine()
                   }}
                 }
             }.handleErrorWith{ (e: Throwable) => 
               IO.println(e.getMessage)
+            } *> IO.println{
+              val end = System.currentTimeMillis()
+              s"Time: ${end - start}"
             }.as(ExitCode.Success)
           case _ => IO.println("Invalid input path.").as(ExitCode.Success)
       case None => IO.println("Not exist arguments.").as(ExitCode.Success)
-
