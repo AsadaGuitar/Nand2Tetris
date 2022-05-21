@@ -55,7 +55,6 @@ object Main extends IOApp, ParserModule, SymbolTableModule:
               validateAssembly(assembly).map(assignAddress) match
                 case Invalid(messages) => IO { messages.map(println) }
                 case Valid(assigns)    => writer(outputPath).use { out => 
-                  println(s"assigns: $assigns")
                   IO{ assigns.map{ instruction => 
                     out.write(instruction.binary16.toString) 
                     out.newLine()
